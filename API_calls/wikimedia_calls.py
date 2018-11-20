@@ -9,27 +9,26 @@ def search_page_by_id(research):
 
     url = "https://fr.wikipedia.org/w/api.php"
 
-    srsearch = []
-    for character in research:
-        if character in forbidden_characters:
-            pass
-        elif character == ' ':
-            srsearch.append('%20')
-        else:
-            srsearch.append(character)
-    srsearch = ''.join(srsearch)
-
     params = {
         'action': 'query',
         'list': 'search',
         'format': 'json',
         'utf8': '',
-        'srsearch': srsearch
+        'srsearch': research
     }
 
     result = session.get(url=url, params=params)
     data = result.json()
 
-    page_id = data['query']['search'][0]['pageid']
+    try:
+        if data['error']['code'] == 'nosrsearch':
+            return 0
+    except KeyError:
+        pass
 
-    return page_id
+        if data['query']['searchinfo']['totalhits'] == 0:
+            return -1
+
+        elif data['query']['searchinfo']['totalhits'] >= 1:
+            page_id = data['query']['search'][0]['pageid']
+            return page_id
