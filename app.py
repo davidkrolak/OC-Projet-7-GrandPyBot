@@ -4,7 +4,8 @@ app = Flask(__name__)
 
 
 @app.route('/')
-    # test
+def test():
+    pass
 
 if __name__ == '__main__':
     app.run()
