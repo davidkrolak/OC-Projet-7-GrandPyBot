@@ -1,5 +1,5 @@
 import string
-from API_calls.openstreetmap_calls import *
+from api_calls.openstreetmap_calls import *
 
 
 def test_search_lat_lon():

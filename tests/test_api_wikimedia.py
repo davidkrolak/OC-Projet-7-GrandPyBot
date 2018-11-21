@@ -1,5 +1,5 @@
 import string
-from API_calls.wikimedia_calls import *
+from api_calls.wikimedia_calls import *
 
 
 def test_search_page_id_1():
