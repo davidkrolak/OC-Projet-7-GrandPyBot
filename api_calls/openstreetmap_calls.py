@@ -18,4 +18,4 @@ def search_lat_lon(research):
     lat = float(data[0]['lat'])
     lon = float(data[0]['lon'])
 
-    return (lat, lon)
+    return lat, lon
