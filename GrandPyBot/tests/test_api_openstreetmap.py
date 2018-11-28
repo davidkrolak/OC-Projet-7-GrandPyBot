@@ -1,4 +1,4 @@
-from api_calls.openstreetmap_calls import *
+from GrandPyBot.api_calls.openstreetmap_calls import *
 
 
 def test_search_lat_lon():
