@@ -1,6 +1,7 @@
 .idea/
 .pytest-cache/
 venv/
+.env
 
 config.py
 leaflet_test/

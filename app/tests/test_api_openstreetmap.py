@@ -1,6 +1,3 @@
-from GrandPyBot.api_calls.openstreetmap_calls import *
-
-
 def test_search_lat_lon():
     assert search_lat_lon('Montpellier') == \
            (43.6112422, 3.8767337)

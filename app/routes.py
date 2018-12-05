@@ -1,8 +1,5 @@
-from flask import Flask, render_template
-
-app = Flask(__name__)
-
-app.config.from_object('config')
+from flask import render_template
+from app import app
 
 
 @app.route('/')
@@ -13,8 +10,7 @@ def main():
 @app.route('/about')
 @app.route('/about/')
 def about():
-    pass
-
+    return render_template('about.html')
 
 if __name__ == "__main__":
     app.run()
