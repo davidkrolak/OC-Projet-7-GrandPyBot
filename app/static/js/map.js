@@ -4,12 +4,15 @@ $("#search_request").on('click', function () {
     var search_query = {"search":search_input};
 
     $.post("/search", search_query, function (data) {
-        var server_response = data;
-        var lat = server_response.lat;
-        var lon = server_response.lon;
-        var mapbox_token = server_response.mapbox_token;
+        var lat = data.lat;
+        var lon = data.lon;
+        var mapbox_token = data.mapbox_token;
+        var wiki_definition = data.wiki_definition;
+        $("#wiki_definition").text(wiki_definition);
 
+        marker = L.marker([lat, lon]).addTo(mymap);
         mymap.setView([lat, lon], 13);
+        L.marker([lat, lon]).addTo(mymap);
         L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
             attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
             maxZoom: 18,
