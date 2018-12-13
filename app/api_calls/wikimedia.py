@@ -30,7 +30,32 @@ def search_page_id_query(research):
 
 
 def geosearch_page_id_query(lat, lon):
-    pass
+    """"""
+    session = requests.Session()
+
+    url = "https://fr.wikipedia.org/w/api.php"
+
+    coords = str(lat) + "|" + str(lon)
+
+    params = {
+        'action': 'query',
+        'list': 'geosearch',
+        'format': 'json',
+        'gscoord': coords,
+        'gsradius': '1000',
+        'gslimit': '5',
+        'utf8': ''
+    }
+
+    result = session.get(url=url, params=params)
+    data = result.json()
+    if "error" in data.keys():
+        return "error"
+    elif len(data["query"]["geosearch"]) == 0:
+        return "no_info"
+    elif len(data["query"]["geosearch"]) > 0:
+        return data["query"]['geosearch'][0]['pageid']
+
 
 def search_page_summary_query(page_id):
     """"""
