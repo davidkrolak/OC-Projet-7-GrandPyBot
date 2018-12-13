@@ -1,4 +1,5 @@
-from app.api_calls import openstreetmap_calls, wikimedia_calls
+import string
+from app.api_calls import openstreetmap, wikimedia
 from app import app
 
 
@@ -8,22 +9,29 @@ def search_script(user_request):
     for word in user_request:
         if word in stop_words:
             pass
+        elif word in string.punctuation:
+            pass
         else:
             filtered_request.append(word + ' ')
-
     filtered_request = ''.join(filtered_request)
 
+    openstreetmap_data = openstreetmap.search_query(filtered_request)
+    wikipedia_page_id = wikimedia.search_page_id_query(filtered_request)
+    if (wikipedia_page_id not in (0, -1)):
+        wiki_definition = wikimedia.search_page_summary_query(wikipedia_page_id)
 
-    coordinates = openstreetmap_calls.search_lat_lon(filtered_request)
-    wikipedia_page_id = wikimedia_calls.search_page_id(filtered_request)
-    wiki_definition = wikimedia_calls.page_summary_text(wikipedia_page_id)
-    response = {"lat": coordinates[0],
-                "lon": coordinates[1],
-                "mapbox_token": app.config['MAPBOX_TOKEN'],
-                "wiki_definition": wiki_definition
-                }
+    if openstreetmap_data == 0:
+        return "no_result"
+    elif (wikipedia_page_id == 0) or (wikipedia_page_id == -1):
+        return "no_result"
+    else:
+        response = {"lat": openstreetmap_data['lat'],
+                    "lon": openstreetmap_data['lon'],
+                    "mapbox_token": app.config['MAPBOX_TOKEN'],
+                    "wiki_definition": wiki_definition
+                    }
 
-    return response
+        return response
 
 
 stop_words = ["a", "abord", "absolument", "afin", "ah", "ai", "aie", "ailleurs",

@@ -1,7 +1,7 @@
 import requests
 
 
-def search_page_id(research):
+def search_page_id_query(research):
     """"""
     session = requests.Session()
 
@@ -18,21 +18,21 @@ def search_page_id(research):
     result = session.get(url=url, params=params)
     data = result.json()
 
-    try:
-        if data['error']['code'] == 'nosrsearch':
-            return 0
-    except KeyError:
-        pass
+    if "error" in data.keys():
+        return 0
 
-        if data['query']['searchinfo']['totalhits'] == 0:
-            return -1
+    if data['query']['searchinfo']['totalhits'] == 0:
+        return -1
 
-        elif data['query']['searchinfo']['totalhits'] >= 1:
-            page_id = data['query']['search'][0]['pageid']
-            return page_id
+    elif data['query']['searchinfo']['totalhits'] >= 1:
+        page_id = data['query']['search'][0]['pageid']
+        return page_id
 
 
-def page_summary_text(page_id):
+def geosearch_page_id_query(lat, lon):
+    pass
+
+def search_page_summary_query(page_id):
     """"""
     if type(page_id) is not int:
         return TypeError
