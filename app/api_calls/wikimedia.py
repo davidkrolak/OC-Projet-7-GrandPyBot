@@ -42,7 +42,7 @@ def geosearch_page_id_query(lat, lon):
         'list': 'geosearch',
         'format': 'json',
         'gscoord': coords,
-        'gsradius': '1000',
+        'gsradius': '100',
         'gslimit': '5',
         'utf8': ''
     }

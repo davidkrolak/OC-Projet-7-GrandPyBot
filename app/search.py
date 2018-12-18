@@ -1,10 +1,12 @@
 import string
-from app.api_calls import openstreetmap, wikimedia
+from app.api_calls.wikimedia import search_page_summary_query, \
+    geosearch_page_id_query
+from app.api_calls.openstreetmap import search_query
 from app import app
 
 
 def search_script(user_request):
-    user_request = user_request.split(' ')
+    user_request = user_request.split(" ")
     filtered_request = []
     for word in user_request:
         if word in stop_words:
@@ -12,29 +14,45 @@ def search_script(user_request):
         elif word in string.punctuation:
             pass
         else:
-            filtered_request.append(word + ' ')
-    filtered_request = ''.join(filtered_request)
+            filtered_request.append(word + " ")
+    filtered_request = "".join(filtered_request)
 
-    openstreetmap_data = openstreetmap.search_query(filtered_request)
-    wikipedia_page_id = wikimedia.search_page_id_query(filtered_request)
-    if (wikipedia_page_id not in (0, -1)):
-        wiki_definition = wikimedia.search_page_summary_query(wikipedia_page_id)
+    # Create a dict who will be send back to the front-end
+    response = {"lat": None,
+                "lon": None,
+                "mapbox_token": app.config["MAPBOX_TOKEN"],
+                "display_name": None,
+                "wiki_summary": None,
+                "status_code": None
+                }
 
+    # This block request coordinates from openstreetmap
+    openstreetmap_data = search_query(filtered_request)
     if openstreetmap_data == 0:
-        return "no_result"
-    elif (wikipedia_page_id == 0) or (wikipedia_page_id == -1):
-        return "no_result"
+        response["status_code"] = "place_not_found"
     else:
-        response = {"lat": openstreetmap_data['lat'],
-                    "lon": openstreetmap_data['lon'],
-                    "mapbox_token": app.config['MAPBOX_TOKEN'],
-                    "wiki_definition": wiki_definition
-                    }
+        response["lat"] = openstreetmap_data["lat"]
+        response["lon"] = openstreetmap_data["lon"]
+        response["display_name"] = openstreetmap_data["display_name"]
 
-        return response
+    # This block search for a wikipedia page based on coordinates given by OSM
+    if response["status_code"] == "place_not_found":
+        pass
+    else:
+        page_id = geosearch_page_id_query(response['lat'], response['lon'])
+        if page_id == "error":
+            response["status_code"] = "error"
+        elif page_id == "no_info":
+            response["status_code"] = "no_info"
+        else:
+            response["wiki_summary"] = search_page_summary_query(page_id)
+            response["status_code"] = "passed"
+
+    return response
 
 
-stop_words = ["a", "abord", "absolument", "afin", "ah", "ai", "aie", "ailleurs",
+stop_words = ["a", "à", "abord", "absolument", "afin", "ah", "ai", "aie",
+              "ailleurs",
               "ainsi", "ait", "allaient", "allo", "allons", "allô", "alors",
               "anterieur", "anterieure", "anterieures", "apres", "après", "as",
               "assez", "attendu", "au", "aucun", "aucune", "aujourd",
@@ -48,7 +66,8 @@ stop_words = ["a", "abord", "absolument", "afin", "ah", "ai", "aie", "ailleurs",
               "celles-là", "celui", "celui-ci", "celui-là", "cent", "cependant",
               "certain", "certaine", "certaines", "certains", "certes", "ces",
               "cet", "cette", "ceux", "ceux-ci", "ceux-là", "chacun", "chacune",
-              "chaque", "cher", "chers", "chez", "chiche", "chut", "chère",
+              "chaque", "cher", "cherche", "chers", "chez", "chiche", "chut",
+              "chère",
               "chères", "ci", "cinq", "cinquantaine", "cinquante",
               "cinquantième", "cinquième", "clac", "clic", "combien", "comme",
               "comment", "comparable", "comparables", "compris", "concernant",
