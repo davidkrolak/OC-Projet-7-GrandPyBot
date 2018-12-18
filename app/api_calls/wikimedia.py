@@ -29,34 +29,6 @@ def search_page_id_query(research):
         return page_id
 
 
-def geosearch_page_id_query(lat, lon):
-    """"""
-    session = requests.Session()
-
-    url = "https://fr.wikipedia.org/w/api.php"
-
-    coords = str(lat) + "|" + str(lon)
-
-    params = {
-        'action': 'query',
-        'list': 'geosearch',
-        'format': 'json',
-        'gscoord': coords,
-        'gsradius': '100',
-        'gslimit': '5',
-        'utf8': ''
-    }
-
-    result = session.get(url=url, params=params)
-    data = result.json()
-    if "error" in data.keys():
-        return "error"
-    elif len(data["query"]["geosearch"]) == 0:
-        return "no_info"
-    elif len(data["query"]["geosearch"]) > 0:
-        return data["query"]['geosearch'][0]['pageid']
-
-
 def search_page_summary_query(page_id):
     """"""
     if type(page_id) is not int:

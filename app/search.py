@@ -52,7 +52,7 @@ def search_script(user_request):
     elif response["status"] == "error":
         pass
     else:
-        page_id = search_page_id_query(filtered_request)
+        page_id = search_page_id_query(response["name"])
         if page_id == "error":
             response["status_code"] = "error"
         elif page_id == "no_info":

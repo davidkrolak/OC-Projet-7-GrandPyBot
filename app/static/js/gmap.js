@@ -1,10 +1,11 @@
-$("#search_request").on('click', function () {
+$("#search_request").submit(function(event) {
+    event.preventDefault();
     var search_input = $("#search_input").val();
     var search_query = {"search": search_input};
     $.post("/search", search_query, function (data) {
 
-        if (data.status_code === "place_not_found") {
-            place_not_found_response(data);
+        if (data.status_code === "zero_results") {
+            zero_results_response(data);
         } else if (data.status_code === "error") {
             error_response(data);
         } else if (data.status_code === "no_info") {
@@ -17,24 +18,23 @@ $("#search_request").on('click', function () {
 
 
 function valid_response(data) {
-    var lat = data.lat;
-    var lon = data.lon;
-    var display_name = data.display_name;
-    var wiki_summary = data.wiki_summary;
-
-    $("#display_name").text(display_name);
-    $("#wiki_definition").text(wiki_summary);
+    coordinates = {lat: data.lat, lng: data.lng};
+    gmap.panTo(coordinates);
+    gmap.setZoom(15);
+    marker.setOptions({
+        position: coordinates,
+        visible: true
+    });
+    $("#display_name").text(data.name);
+    $("#wiki_definition").text(data.wiki_summary);
 }
 
-function place_not_found_response(data) {
+function zero_results_response(data) {
     console.log(data.status_code);
 }
 
 function error_response(data) {
-    var lat = data.lat;
-    var lon = data.lon;
-    var display_name = data.display_name;
-
+    coordinates = {lat: data.lat, lng: data.lng};
     $("#display_name").text(display_name);
     $("#wiki_definition").text("Je sais ou c'est mais je ne connais rien a propos de cette endroit");
 
@@ -42,10 +42,7 @@ function error_response(data) {
 }
 
 function no_info_response(data) {
-    var lat = data.lat;
-    var lon = data.lon;
-    var display_name = data.display_name;
-
+    coordinates = {lat: data.lat, lng: data.lng};
     $("#display_name").text(display_name);
     $("#wiki_definition").text("Je sais ou c'est mais je ne connais rien a propos de cette endroit");
 

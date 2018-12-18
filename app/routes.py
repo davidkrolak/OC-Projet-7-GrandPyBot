@@ -13,8 +13,3 @@ def main():
 def search():
     user_request = request.form.get('search')
     return jsonify(search_script(user_request))
-
-
-@app.route("/init_token", methods=["POST"])
-def init_token():
-    return jsonify({"token": app.config['GOOGLE_CLOUD_TOKEN']})

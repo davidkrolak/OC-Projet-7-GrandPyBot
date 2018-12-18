@@ -10,14 +10,17 @@
 
   <h1>GrandPyBot</h1>
   <div id="mapid"></div>
-  <input type="text" id="search_input"/><button
-          id="search_request">Rechercher</button>
-  <h2 id="display_name"></h2>
+  <form id="search_request" action="">
+    <input type="text" id="search_input"/>
+    <input type="submit" action="Submit">
+  </form>
+    <h2 id="display_name"></h2>
   <p id="wiki_definition"></p>
 
 
   <script type="text/javascript" src="../static/js/jquery-3.3.1.js"></script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBPRJOkFSSGVNTOGiweoXQHX4fybc4veDs&libraries=places"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBPRJOkFSSGVNTOGiweoXQHX4fybc4veDs"></script>
   <script type="text/javascript" src="../static/js/init_gmap.js"></script>
+  <script type="text/javascript" src="../static/js/gmap.js"></script>
 </body>
 </html>
