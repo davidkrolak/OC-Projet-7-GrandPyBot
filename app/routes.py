@@ -1,5 +1,5 @@
 from flask import render_template, request, jsonify
-from app.api_calls import openstreetmap, wikimedia
+from app.api_calls import wikimedia
 from app.search import search_script
 from app import app
 

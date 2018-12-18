@@ -1,7 +1,7 @@
 import string
 from app.api_calls.wikimedia import search_page_summary_query, \
-    geosearch_page_id_query
-from app.api_calls.openstreetmap import search_query
+    search_page_id_query
+from app.api_calls.google_places import search_query
 from app import app
 
 
@@ -18,28 +18,41 @@ def search_script(user_request):
     filtered_request = "".join(filtered_request)
 
     # Create a dict who will be send back to the front-end
-    response = {"lat": None,
-                "lon": None,
-                "mapbox_token": app.config["MAPBOX_TOKEN"],
-                "display_name": None,
+    response = {"id": None,
+                "name": None,
+                "formatted_address": None,
+                "lat": None,
+                "lng": None,
                 "wiki_summary": None,
-                "status_code": None
+                "status": None
                 }
 
-    # This block request coordinates from openstreetmap
-    openstreetmap_data = search_query(filtered_request)
-    if openstreetmap_data == 0:
-        response["status_code"] = "place_not_found"
+    # This block manage the request made to the google places API
+    google_places_data = search_query(filtered_request)
+    if google_places_data == "ZERO_RESULTS":
+        response["status"] = "zero_results"
+    elif google_places_data == "OVER_QUERY_LIMIT":
+        response["status"] = "error"
+    elif google_places_data == "REQUEST_DENIED":
+        response["status"] = "error"
+    elif google_places_data == "INVALID_REQUEST":
+        response["status"] = "error"
+    elif google_places_data == "UNKNOWN_ERROR":
+        response["status"] = "error"
     else:
-        response["lat"] = openstreetmap_data["lat"]
-        response["lon"] = openstreetmap_data["lon"]
-        response["display_name"] = openstreetmap_data["display_name"]
+        response["id"] = google_places_data["id"]
+        response["name"] = google_places_data["name"]
+        response["formatted_address"] = google_places_data["formatted_address"]
+        response["lat"] = google_places_data["geometry"]["location"]["lat"]
+        response["lng"] = google_places_data["geometry"]["location"]["lng"]
 
-    # This block search for a wikipedia page based on coordinates given by OSM
-    if response["status_code"] == "place_not_found":
+    # This block search for a wikipedia page and return the summary
+    if response["status"] == "zero_results":
+        pass
+    elif response["status"] == "error":
         pass
     else:
-        page_id = geosearch_page_id_query(response['lat'], response['lon'])
+        page_id = search_page_id_query(filtered_request)
         if page_id == "error":
             response["status_code"] = "error"
         elif page_id == "no_info":
