@@ -25,6 +25,7 @@ function valid_response(data) {
         position: coordinates,
         visible: true
     });
+    $("#search_input").val("");
     $("#display_name").text(data.name);
     $("#wiki_definition").text(data.wiki_summary);
 }

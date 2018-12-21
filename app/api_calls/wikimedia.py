@@ -1,8 +1,9 @@
 import requests
 
 
-def search_page_id_query(research):
-    """"""
+def search_page_id_query(research, tries=0):
+    """Request for a wikipedia page id based on a string query we send to the
+    wikimedia API and return it"""
     session = requests.Session()
 
     url = "https://fr.wikipedia.org/w/api.php"
@@ -16,23 +17,37 @@ def search_page_id_query(research):
     }
 
     result = session.get(url=url, params=params)
-    data = result.json()
+    tries += 1
 
-    if "error" in data.keys():
-        return 0
+    # http code response management
+    if result.status_code == 500:
+        return "wikimedia_error_500"
+    elif result.status_code == 504 and tries <=2:
+        search_page_id_query(research, tries)
+    elif result.status_code == 504 and tries > 2:
+        return "wikimedia_error_504"
+    elif result.status_code == 400:
+        return "wikimedia_error_400"
+    elif result.status_code == 404:
+        return "wikimedia_error_404"
+    elif result.status_code == 200:
+        data = result.json()
+        if "error" in data.keys():
+            return data["error"]["code"]
 
-    if data['query']['searchinfo']['totalhits'] == 0:
-        return -1
+        if data['query']['searchinfo']['totalhits'] == 0:
+            return "zero_results"
 
-    elif data['query']['searchinfo']['totalhits'] >= 1:
-        page_id = data['query']['search'][0]['pageid']
-        return page_id
+        elif data['query']['searchinfo']['totalhits'] >= 1:
+            page_id = data['query']['search'][0]['pageid']
+            return page_id
 
 
-def search_page_summary_query(page_id):
-    """"""
+def search_page_summary_query(page_id, tries=0):
+    """Request the summary from a wikipedia page to the wikimedia API
+    with the page id and return it in a string format"""
     if type(page_id) is not int:
-        return TypeError
+        raise TypeError
     elif type(page_id) is int:
         session = requests.Session()
 
@@ -49,6 +64,23 @@ def search_page_summary_query(page_id):
         }
 
         result = session.get(url=url, params=params)
-        data = result.json()
+        tries =+ 1
 
-        return data['query']['pages'][str(page_id)]['extract']
+        if result.status_code == 500:
+            return "wikimedia_error_500"
+        elif result.status_code == 504 and tries <=2:
+            search_page_summary_query(page_id, tries)
+        elif result.status_code == 504 and tries > 2:
+            return "wikimedia_error_504"
+        elif result.status_code == 400:
+            return "wikimedia_error_400"
+        elif result.status_code == 404:
+            return "wikimedia_error_404"
+        elif result.status_code == 200:
+            data = result.json()
+            if "extract" in data["query"]["pages"][str(page_id)].keys():
+                summary = data['query']['pages'][str(page_id)]['extract']
+            else:
+                summary = "no_summary"
+
+            return summary

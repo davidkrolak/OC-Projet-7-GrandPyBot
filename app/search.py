@@ -6,16 +6,7 @@ from app import app
 
 
 def search_script(user_request):
-    user_request = user_request.split(" ")
-    filtered_request = []
-    for word in user_request:
-        if word in stop_words:
-            pass
-        elif word in string.punctuation:
-            pass
-        else:
-            filtered_request.append(word + " ")
-    filtered_request = "".join(filtered_request)
+    user_request = request_parser(user_request)
 
     # Create a dict who will be send back to the front-end
     response = {"id": None,
@@ -28,7 +19,7 @@ def search_script(user_request):
                 }
 
     # This block manage the request made to the google places API
-    google_places_data = search_query(filtered_request)
+    google_places_data = search_query(user_request)
     if google_places_data == "ZERO_RESULTS":
         response["status"] = "zero_results"
     elif google_places_data == "OVER_QUERY_LIMIT":
@@ -62,6 +53,27 @@ def search_script(user_request):
             response["status_code"] = "passed"
 
     return response
+
+
+def request_parser(user_request):
+    filtered_request = []
+    for character in string.punctuation:
+        if character in user_request:
+            user_request = user_request.replace(character, " ")
+
+    user_request = user_request.split(" ")
+    for word in user_request:
+        flag = True
+        if word.lower() in stop_words:
+            flag = False
+        elif word in string.punctuation:
+            flag = False
+
+        if flag == True:
+            filtered_request.append(word + " ")
+
+    filtered_request = "".join(filtered_request).strip()
+    return filtered_request
 
 
 stop_words = ["a", "à", "abord", "absolument", "afin", "ah", "ai", "aie",
@@ -118,7 +130,8 @@ stop_words = ["a", "à", "abord", "absolument", "afin", "ah", "ai", "aie",
               "nous-mêmes", "nouveau", "nul", "néanmoins", "nôtre", "nôtres",
               "o", "oh", "ohé", "ollé", "olé", "on", "ont", "onze", "onzième",
               "ore", "ou", "ouf", "ouias", "oust", "ouste", "outre", "ouvert",
-              "ouverte", "ouverts", "o|", "où", "p", "paf", "pan", "par",
+              "ouverte", "ouverts", "o|", "où", "p", "paf", "pan", "papy",
+              "par",
               "parce", "parfois", "parle", "parlent", "parler", "parmi",
               "parseme", "partant", "particulier", "particulière",
               "particulièrement", "pas", "passé", "pendant", "pense", "permet",
@@ -158,4 +171,4 @@ stop_words = ["a", "à", "abord", "absolument", "afin", "ah", "ai", "aie",
               "voici", "voilà", "vont", "vos", "votre", "vous", "vous-mêmes",
               "vu", "vé", "vôtre", "vôtres", "w", "x", "y", "z", "zut", "à",
               "â", "ça", "ès", "étaient", "étais", "était", "étant", "été",
-              "être", "ô"]
+              "être", "ô", "grandpy", "bot", "adresse", "salut", "bonjour"]
