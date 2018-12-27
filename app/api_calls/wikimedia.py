@@ -43,7 +43,7 @@ def search_page_id_query(research, tries=0):
             return page_id
 
 
-def search_page_summary_query(page_id, tries=0):
+def search_page_summary_query(page_id):
     """Request the summary from a wikipedia page to the wikimedia API
     with the page id and return it in a string format"""
     if type(page_id) is not int:

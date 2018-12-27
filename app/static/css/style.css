@@ -10,6 +10,7 @@
 #main_title {
     padding: 5px;
     text-align: center;
+    font-family: CaviarDreams, Arial, sans-serif;
     background-color: #d7d7d7;
 }
 
@@ -21,6 +22,7 @@
     bottom: 0;
     height: 60px;
     width: 100%;
+    font-family: CaviarDreams, Arial, sans-serif;
     background-color: #d7d7d7;
 }
 
@@ -41,5 +43,8 @@
     border-radius: 50%;
 }
 
-body {
+
+@font-face {
+    font-family: "CaviarDreams";
+    src: url("../fonts/CaviarDreams.ttf");
 }

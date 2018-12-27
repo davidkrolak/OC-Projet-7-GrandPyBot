@@ -1,4 +1,5 @@
 import string
+import random
 from app.api_calls.wikimedia import search_page_summary_query, \
     search_page_id_query
 from app.api_calls.google_places import search_query
@@ -14,6 +15,7 @@ def search_script(user_request):
                 "lat": None,
                 "lng": None,
                 "wiki_summary": None,
+                "grandpy_response": None,
                 "status": None
                 }
 
@@ -47,11 +49,13 @@ def search_script(user_request):
             response["status"] = "error"
         elif page_id == "no_info":
             response["status"] = "no_info"
+        elif page_id == "zero_results":
+            response["status"] = "no_info"
         else:
             response["wiki_summary"] = search_page_summary_query(page_id)
             response["status"] = "ok"
 
-    return response
+    return grandpy_response(response)
 
 
 def request_parser(user_request):
@@ -69,6 +73,18 @@ def request_parser(user_request):
 
     filtered_request = "".join(filtered_request).strip()
     return filtered_request
+
+
+def grandpy_response(response_dict):
+    if response_dict["status"] == "zero_results":
+        pass
+    elif response_dict["status"] == "error":
+        pass
+    elif response_dict["status"] == "no_info":
+        pass
+    else:
+        pass
+    return response_dict
 
 
 stop_words = ["a", "à", "abord", "absolument", "afin", "ah", "ai", "aie",
