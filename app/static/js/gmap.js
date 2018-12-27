@@ -25,6 +25,8 @@ function valid_response(data) {
         position: coordinates,
         visible: true
     });
+    $("#mapid").show();
+    $("#mapid_placeholder").hide();
     $("#search_input").val("");
     $("#display_name").text(data.name);
     $("#wiki_definition").text(data.wiki_summary);

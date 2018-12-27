@@ -1,3 +1,4 @@
+$("#mapid").hide();
 var coordinates = {lat: 0, lng: 0};
 var gmap = new google.maps.Map(document.getElementById('mapid'), {
     zoom: 1,
@@ -10,4 +11,3 @@ var marker = new google.maps.Marker({
     map: gmap,
     visible: false
 });
-

@@ -19,3 +19,8 @@ def test_search_query_2():
                                                   'France'
     assert openclassrooms["geometry"]["location"]["lat"] == 48.8747578
     assert openclassrooms["geometry"]["location"]["lng"] == 2.350564700000001
+
+
+def test_search_query_3():
+   misleading_request = search_query("fdsjfdslfkjsdlkhfiuerw")
+   assert misleading_request == "ZERO_RESULTS"

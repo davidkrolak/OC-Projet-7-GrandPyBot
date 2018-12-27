@@ -2,7 +2,6 @@ import string
 from app.api_calls.wikimedia import search_page_summary_query, \
     search_page_id_query
 from app.api_calls.google_places import search_query
-from app import app
 
 
 def search_script(user_request):
@@ -45,12 +44,12 @@ def search_script(user_request):
     else:
         page_id = search_page_id_query(response["name"])
         if page_id == "error":
-            response["status_code"] = "error"
+            response["status"] = "error"
         elif page_id == "no_info":
-            response["status_code"] = "no_info"
+            response["status"] = "no_info"
         else:
             response["wiki_summary"] = search_page_summary_query(page_id)
-            response["status_code"] = "passed"
+            response["status"] = "ok"
 
     return response
 
@@ -63,13 +62,9 @@ def request_parser(user_request):
 
     user_request = user_request.split(" ")
     for word in user_request:
-        flag = True
         if word.lower() in stop_words:
-            flag = False
-        elif word in string.punctuation:
-            flag = False
-
-        if flag == True:
+            pass
+        else:
             filtered_request.append(word + " ")
 
     filtered_request = "".join(filtered_request).strip()
@@ -171,4 +166,5 @@ stop_words = ["a", "à", "abord", "absolument", "afin", "ah", "ai", "aie",
               "voici", "voilà", "vont", "vos", "votre", "vous", "vous-mêmes",
               "vu", "vé", "vôtre", "vôtres", "w", "x", "y", "z", "zut", "à",
               "â", "ça", "ès", "étaient", "étais", "était", "étant", "été",
-              "être", "ô", "grandpy", "bot", "adresse", "salut", "bonjour"]
+              "être", "ô", "grandpy", "bot", "adresse", "salut", "bonjour",
+              "hello"]

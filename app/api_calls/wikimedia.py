@@ -47,7 +47,7 @@ def search_page_summary_query(page_id, tries=0):
     """Request the summary from a wikipedia page to the wikimedia API
     with the page id and return it in a string format"""
     if type(page_id) is not int:
-        raise TypeError
+        return TypeError
     elif type(page_id) is int:
         session = requests.Session()
 

@@ -4,4 +4,6 @@ venv/
 .env
 
 leaflet_test/
-
+app/static/css/bootstrap.css
+app/static/js/bootstrap.js
+app/static/js/jquery-3.3.1.js

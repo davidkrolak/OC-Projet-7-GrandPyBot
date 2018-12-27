@@ -1,7 +1,8 @@
 from app import app
 import googlemaps
 
-gmaps = googlemaps.Client(key="AIzaSyBPRJOkFSSGVNTOGiweoXQHX4fybc4veDs")
+token = app.config["GOOGLE_CLOUD_TOKEN"]
+gmaps = googlemaps.Client(key=token)
 
 
 def search_query(research):
@@ -9,7 +10,8 @@ def search_query(research):
     if len(research_prediction) == 0:
         return "ZERO_RESULTS"
     else:
-        google_places_results = gmaps.places(research_prediction[0]["description"])
+        google_places_results = gmaps.places(
+                research_prediction[0]["description"])
 
     # Check API response status
     if google_places_results["status"] == "ZERO_RESULTS":

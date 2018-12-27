@@ -1,5 +1,45 @@
 #mapid {
-    width: 400px;
-    height: 400px;
+    height: 250px;
 }
 
+#mapid_placeholder {
+    width: 100%;
+    height: 250px;
+}
+
+#main_title {
+    padding: 5px;
+    text-align: center;
+    background-color: #d7d7d7;
+}
+
+#grandpy_response {
+}
+
+#about {
+    position: fixed;
+    bottom: 0;
+    height: 60px;
+    width: 100%;
+    background-color: #d7d7d7;
+}
+
+#about_content {
+    padding-left: 10px;
+}
+
+#about_placeholder {
+    width: 100%;
+    height: 80px;
+}
+
+
+.footer_logos {
+    padding: 10px;
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+}
+
+body {
+}

@@ -1,26 +1,47 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
   <title>GrandPyBot</title>
-  <link rel="stylesheet" href="../static/css/style.css">
+  <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href={{ url_for("static", filename="css/style.css") }}>
+  <link rel="stylesheet" href={{ url_for("static", filename="css/bootstrap.css") }}>
 </head>
 
 <body>
+<h1 id="main_title">GrandPyBot</h1>
 
-  <h1>GrandPyBot</h1>
-  <div id="mapid"></div>
+<div class="container">
+  <div id="mapid" class="col-12"></div>
+  <div id="mapid_placeholder"></div>
   <form id="search_request" action="">
-    <input type="text" id="search_input"/>
-    <input type="submit" action="Submit">
+    <div class="input-group mb-3">
+      <input type="text" class="form-control" id="search_input" placeholder="Pose moi ta question ici" aria-label="Pose moi ta question ici">
+      <div class="input-group-append">
+        <button class="btn btn-outline-secondary" type="submit">Ok</button>
+      </div>
+    </div>
   </form>
-    <h2 id="display_name"></h2>
-  <p id="wiki_definition"></p>
 
+  <div id="grandpy_response" class="row">
+    <h2 id="display_name" class="col-6"></h2>
+    <p id="wiki_definition" class="col-12"></p>
+  </div>
+</div>
 
-  <script type="text/javascript" src="../static/js/jquery-3.3.1.js"></script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBPRJOkFSSGVNTOGiweoXQHX4fybc4veDs"></script>
-  <script type="text/javascript" src="../static/js/init_gmap.js"></script>
-  <script type="text/javascript" src="../static/js/gmap.js"></script>
+<div id="about_placeholder"></div>
+<footer id="about" class="container-fluid">
+  <div id="about_content" class="row">
+      <span class="col-xs-2">A propos:
+      <a href="https://github.com/Axel-V"><img class="footer_logos" src="{{ url_for("static", filename="img/GitHub_Logo.png") }}" alt="github logo"></a>
+      <a href="https://twitter.com/Axel_V_py"><img class="footer_logos" src="{{ url_for("static", filename="img/Twitter_Logo.png") }}" alt="twitter logo"></a>
+      </span>
+  </div>
+</footer>
+
+<script src="https://maps.googleapis.com/maps/api/js?key={{ config["GOOGLE_CLOUD_TOKEN"] }}"></script>
+<script type="text/javascript" src={{ url_for("static", filename="js/jquery-3.3.1.js") }}></script>
+<script type="text/javascript" src={{ url_for("static", filename="js/bootstrap.js") }}></script>
+<script type="text/javascript" src={{ url_for("static", filename="js/init_gmap.js") }}></script>
+<script type="text/javascript" src={{ url_for("static", filename="js/gmap.js") }}></script>
 </body>
 </html>
