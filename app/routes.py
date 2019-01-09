@@ -9,7 +9,6 @@ def main():
 
 
 @app.route('/search', methods=['POST'])
-@app.route('/search/', methods=['POST'])
 def search():
     user_request = request.form.get('search')
     return jsonify(search_script(user_request))
