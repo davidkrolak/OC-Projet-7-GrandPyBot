@@ -1,1 +1,1 @@
-gunicorn grandpybot.py
+gunicorn grandpybot-oc:app
