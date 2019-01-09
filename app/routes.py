@@ -1,5 +1,4 @@
 from flask import render_template, request, jsonify
-from app.api_calls import wikimedia
 from app.search import search_script
 from app import app
 
@@ -10,6 +9,7 @@ def main():
 
 
 @app.route('/search', methods=['POST'])
+@app.route('/search/', methods=['POST'])
 def search():
     user_request = request.form.get('search')
     return jsonify(search_script(user_request))
