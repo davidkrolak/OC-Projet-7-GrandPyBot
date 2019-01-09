@@ -86,6 +86,15 @@ def grandpy_response(response_dict):
         pass
     return response_dict
 
+zero_results_responses = []
+
+error_responses = []
+
+no_info_responses = []
+
+good_responses = ["Oui je connais cette endroit ! Laisse moi t'en parler un "
+                  "peu"]
+
 
 stop_words = ["a", "à", "abord", "absolument", "afin", "ah", "ai", "aie",
               "ailleurs",

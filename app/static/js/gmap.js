@@ -29,11 +29,13 @@ function valid_response(data) {
     $("#mapid_placeholder").hide();
     $("#search_input").val("");
     $("#display_name").text(data.name);
+    $("#formated_address").text(data.formatted_address);
     $("#wiki_definition").text(data.wiki_summary);
 }
 
 function zero_results_response(data) {
     $("#search_input").val("");
+    $("#display_name").text("");
     $("#wiki_definition").text("Je ne peux pas répondre a ta question, désolé");
     console.log(data.status);
 }
