@@ -1,1 +1,1 @@
-gunicorn grandpybot-oc:app
+web: gunicorn grandpybot:app
