@@ -77,24 +77,26 @@ def request_parser(user_request):
 
 def grandpy_response(response_dict):
     if response_dict["status"] == "zero_results":
-        pass
+        response_dict["grandpy_response"] = zero_results_responses[0]
     elif response_dict["status"] == "error":
-        pass
+        response_dict["grandpy_response"] = error_responses[0]
     elif response_dict["status"] == "no_info":
-        pass
+        response_dict["grandpy_response"] = no_info_responses[0]
     else:
-        pass
+        response_dict["grandpy_response"] = good_responses[0]
     return response_dict
 
-zero_results_responses = []
 
-error_responses = []
+zero_results_responses = ["Je ne peux pas répondre à ta question, désolé"]
 
-no_info_responses = []
+error_responses = ["Je sais ou c'est mais je ne connais rien à propos de "
+                   "cette endroit"]
+
+no_info_responses = ["Je sais ou c'est mais je ne connais rien à propos de "
+                     "cette endroit"]
 
 good_responses = ["Oui je connais cette endroit ! Laisse moi t'en parler un "
                   "peu"]
-
 
 stop_words = ["a", "à", "abord", "absolument", "afin", "ah", "ai", "aie",
               "ailleurs",

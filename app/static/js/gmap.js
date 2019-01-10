@@ -1,4 +1,4 @@
-$("#search_request").submit(function(event) {
+$("#search_request").submit(function (event) {
     event.preventDefault();
     var search_input = $("#search_input").val();
     var search_query = {"search": search_input};
@@ -34,19 +34,31 @@ function valid_response(data) {
 }
 
 function zero_results_response(data) {
+    coordinates = {lat: 0, lng: 0};
+    gmap.panTo(coordinates);
+    gmap.setZoom(1);
+    marker.setOptions({
+        position: coordinates,
+        visible: false
+    });
     $("#search_input").val("");
     $("#display_name").text("");
-    $("#wiki_definition").text("Je ne peux pas répondre a ta question, désolé");
-    console.log(data.status);
+    $("#formated_address").text("");
+    $("#wiki_definition").text(data.grandpy_response);
 }
 
 function error_response(data) {
     coordinates = {lat: data.lat, lng: data.lng};
+    gmap.panTo(coordinates);
+    gmap.setZoom(15);
+    marker.setOptions({
+        position: coordinates,
+        visible: true
+    });
     $("#search_input").val("");
     $("#display_name").text(data.name);
-    $("#wiki_definition").text("Je sais ou c'est mais je ne connais rien a propos de cette endroit");
-
-    console.log(data.status);
+    $("#formated_address").text(data.formatted_address);
+    $("#wiki_definition").text(data.grandpy_response);
 }
 
 function no_info_response(data) {
@@ -61,7 +73,6 @@ function no_info_response(data) {
     $("#mapid_placeholder").hide();
     $("#search_input").val("");
     $("#display_name").text(data.name);
-    $("#wiki_definition").text("Je sais ou c'est mais je ne connais rien a propos de cette endroit");
-
-    console.log(data.status);
+    $("#formated_address").text(data.formatted_address);
+    $("#wiki_definition").text(data.grandpy_response);
 }
