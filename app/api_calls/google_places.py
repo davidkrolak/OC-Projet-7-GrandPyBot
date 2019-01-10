@@ -1,7 +1,7 @@
 from app import app
 import googlemaps
 
-token = app.config["GOOGLE_CLOUD_TOKEN"]
+token = app.config["GOOGLE_CLOUD_TOKEN_BACK"]
 gmaps = googlemaps.Client(key=token)
 
 
