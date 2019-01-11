@@ -3,8 +3,10 @@
 <head>
   <title>GrandPyBot</title>
   <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
   <link rel="stylesheet" href={{ url_for("static", filename="css/style.css") }}>
-  <link rel="stylesheet" href={{ url_for("static", filename="css/bootstrap.css") }}>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+
 </head>
 
 <body>
@@ -15,7 +17,7 @@
   <div id="mapid_placeholder"></div>
   <form id="search_request" action="">
     <div class="input-group mb-3">
-      <input type="text" class="form-control" id="search_input" placeholder="Pose moi ta question ici" aria-label="Pose moi ta question ici">
+      <input type="text" class="form-control" id="search_input" placeholder="Pose moi ta question ici" required>
       <div class="input-group-append">
         <button class="btn btn-outline-secondary" type="submit">Ok</button>
       </div>
@@ -40,8 +42,7 @@
 </footer>
 
 <script src="https://maps.googleapis.com/maps/api/js?key={{ config["GOOGLE_CLOUD_TOKEN_FRONT"] }}"></script>
-<script type="text/javascript" src={{ url_for("static", filename="js/jquery-3.3.1.js") }}></script>
-<script type="text/javascript" src={{ url_for("static", filename="js/bootstrap.js") }}></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript" src={{ url_for("static", filename="js/init_gmap.js") }}></script>
 <script type="text/javascript" src={{ url_for("static", filename="js/gmap.js") }}></script>
 </body>

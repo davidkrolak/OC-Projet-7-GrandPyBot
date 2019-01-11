@@ -6,59 +6,34 @@ from app.api_calls.google_places import search_query
 
 
 def search_script(user_request):
+    """"""
     user_request = request_parser(user_request)
 
     # Create a dict who will be send back to the front-end
-    response = {"id": None,
-                "name": None,
-                "formatted_address": None,
-                "lat": None,
-                "lng": None,
-                "wiki_summary": None,
-                "grandpy_response": None,
-                "status": None
-                }
+    response_dict = {"id": None,
+                     "name": None,
+                     "formatted_address": None,
+                     "lat": None,
+                     "lng": None,
+                     "wiki_summary": None,
+                     "grandpy_response": None,
+                     "status": None
+                     }
 
-    # This block manage the request made to the google places API
-    google_places_data = search_query(user_request)
-    if google_places_data == "ZERO_RESULTS":
-        response["status"] = "zero_results"
-    elif google_places_data == "OVER_QUERY_LIMIT":
-        response["status"] = "error"
-    elif google_places_data == "REQUEST_DENIED":
-        response["status"] = "error"
-    elif google_places_data == "INVALID_REQUEST":
-        response["status"] = "error"
-    elif google_places_data == "UNKNOWN_ERROR":
-        response["status"] = "error"
-    else:
-        response["id"] = google_places_data["id"]
-        response["name"] = google_places_data["name"]
-        response["formatted_address"] = google_places_data["formatted_address"]
-        response["lat"] = google_places_data["geometry"]["location"]["lat"]
-        response["lng"] = google_places_data["geometry"]["location"]["lng"]
+    google_api_request(user_request, response_dict)
 
-    # This block search for a wikipedia page and return the summary
-    if response["status"] == "zero_results":
-        pass
-    elif response["status"] == "error":
-        pass
-    else:
-        page_id = search_page_id_query(response["name"])
-        if page_id == "error":
-            response["status"] = "error"
-        elif page_id == "no_info":
-            response["status"] = "no_info"
-        elif page_id == "zero_results":
-            response["status"] = "no_info"
-        else:
-            response["wiki_summary"] = search_page_summary_query(page_id)
-            response["status"] = "ok"
+    wikimedia_api_request(response_dict)
 
-    return grandpy_response(response)
+    grandpy_response(response_dict)
+
+    return response_dict
 
 
 def request_parser(user_request):
+    """Parse the user request in multiple words, then check if those one are
+    punctuation or not and finally delete the words in the request who matchs
+    our stop words list"""
+
     filtered_request = []
     for character in string.punctuation:
         if character in user_request:
@@ -75,28 +50,98 @@ def request_parser(user_request):
     return filtered_request
 
 
-def grandpy_response(response_dict):
-    if response_dict["status"] == "zero_results":
-        response_dict["grandpy_response"] = zero_results_responses[0]
-    elif response_dict["status"] == "error":
-        response_dict["grandpy_response"] = error_responses[0]
-    elif response_dict["status"] == "no_info":
-        response_dict["grandpy_response"] = no_info_responses[0]
+def google_api_request(user_request, response_dict):
+    """Request google places data from the google API and deal with errors
+    linked to it then modify value in our response dict"""
+    google_places_data = search_query(user_request)
+
+    if google_places_data == "ZERO_RESULTS":
+        response_dict["status"] = "zero_results"
+    elif google_places_data == "OVER_QUERY_LIMIT":
+        response_dict["status"] = "error"
+    elif google_places_data == "REQUEST_DENIED":
+        response_dict["status"] = "error"
+    elif google_places_data == "INVALID_REQUEST":
+        response_dict["status"] = "error"
+    elif google_places_data == "UNKNOWN_ERROR":
+        response_dict["status"] = "error"
     else:
-        response_dict["grandpy_response"] = good_responses[0]
-    return response_dict
+        response_dict["id"] = google_places_data["id"]
+        response_dict["name"] = google_places_data["name"]
+        response_dict["formatted_address"] = google_places_data[
+            "formatted_address"]
+        response_dict["lat"] = google_places_data["geometry"]["location"]["lat"]
+        response_dict["lng"] = google_places_data["geometry"]["location"]["lng"]
 
 
-zero_results_responses = ["Je ne peux pas répondre à ta question, désolé"]
+def wikimedia_api_request(response_dict):
+    """Request wikipedia data from the wikimedia API and deals with errors
+    linked to it, then pass the wikipedia summary of the page requested to
+    our response dict if possible"""
+    if response_dict["status"] == "zero_results":
+        pass
+    elif response_dict["status"] == "error":
+        pass
+    else:
+        page_id = search_page_id_query(response_dict["name"])
+        if page_id == "error":
+            response_dict["status"] = "error"
+        elif page_id == "no_info":
+            response_dict["status"] = "no_info"
+        elif page_id == "zero_results":
+            response_dict["status"] = "no_info"
+        else:
+            response_dict["wiki_summary"] = search_page_summary_query(page_id)
+            response_dict["status"] = "ok"
 
-error_responses = ["Je sais ou c'est mais je ne connais rien à propos de "
-                   "cette endroit"]
+
+def grandpy_response(response_dict):
+    """Add a randomized response to our response dict depending on the status of
+    our request"""
+    if response_dict["status"] == "zero_results":
+        pos = random.randint(0, len(zero_results_responses) - 1)
+        response_dict["grandpy_response"] = zero_results_responses[pos]
+    elif response_dict["status"] == "error":
+        pos = random.randint(0, len(error_responses) - 1)
+        response_dict["grandpy_response"] = error_responses[pos]
+    elif response_dict["status"] == "no_info":
+        pos = random.randint(0, len(no_info_responses) - 1)
+        response_dict["grandpy_response"] = no_info_responses[pos]
+    else:
+        pos = random.randint(0, len(good_responses) - 1)
+        response_dict["grandpy_response"] = good_responses[pos]
+
+
+zero_results_responses = ["Je ne peux pas répondre à ta question, désolé",
+
+                          "J'aimerai pouvoir te répondre mais je suis trop "
+                          "fatigué pour le moment",
+
+                          "J'ai peur de ne pas pouvoir t'aider",
+
+                          "Mmmh désolé, je ne peux pas te répondre à ce sujet"]
+
+error_responses = ["Je ne peux pas répondre à ta question, désolé",
+
+                   "Je crois bien que mes informations à ce sujet sont "
+                   "éronnées, désolé mais je ne vais pas pouvoir te répondre",
+
+                   "J'aurais aimé te répondre mais je ne tourne pas rond "
+                   "aujourd'hui"]
 
 no_info_responses = ["Je sais ou c'est mais je ne connais rien à propos de "
-                     "cette endroit"]
+                     "cette endroit",
+
+                     "Je connais l'adresse de ce lieu mais "
+                     "je ne pourrais pas t'en dire plus",
+
+                     "Je connais ce lieu, malheuresement je ne me souviens "
+                     "pas de son histoire"]
 
 good_responses = ["Oui je connais cette endroit ! Laisse moi t'en parler un "
-                  "peu"]
+                  "peu",
+
+                  "Je connais ce lieu ! laisse moi t'en parler"]
 
 stop_words = ["a", "à", "abord", "absolument", "afin", "ah", "ai", "aie",
               "ailleurs",
