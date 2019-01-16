@@ -6,6 +6,8 @@ gmaps = googlemaps.Client(key=token)
 
 
 def search_query(research):
+    if len(research) == 0:
+        return "INVALID_REQUEST"
     research_prediction = gmaps.places_autocomplete_query(str(research))
     if len(research_prediction) == 0:
         return "ZERO_RESULTS"

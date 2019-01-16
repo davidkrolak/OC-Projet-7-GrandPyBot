@@ -7,9 +7,6 @@ from app.api_calls.google_places import search_query
 
 def search_script(user_request):
     """"""
-    user_request = request_parser(user_request)
-
-    # Create a dict who will be send back to the front-end
     response_dict = {"id": None,
                      "name": None,
                      "formatted_address": None,
@@ -19,6 +16,8 @@ def search_script(user_request):
                      "grandpy_response": None,
                      "status": None
                      }
+
+    user_request = request_parser(user_request)
 
     google_api_request(user_request, response_dict)
 
@@ -112,36 +111,29 @@ def grandpy_response(response_dict):
         response_dict["grandpy_response"] = good_responses[pos]
 
 
-zero_results_responses = ["Je ne peux pas répondre à ta question, désolé",
+zero_results_responses = [
+    "Je ne peux pas répondre à ta question, désolé",
+    "J'aimerai pouvoir te répondre mais je suis trop fatigué pour le moment",
+    "J'ai peur de ne pas pouvoir t'aider",
+    "Mmmh désolé, je ne peux pas te répondre à ce sujet"
+]
 
-                          "J'aimerai pouvoir te répondre mais je suis trop "
-                          "fatigué pour le moment",
+error_responses = [
+    "Je ne peux pas répondre à ta question, désolé",
+    "Je crois bien que mes informations à ce sujet sont éronnées, désolé mais je ne vais pas pouvoir te répondre",
+    "J'aurais aimé te répondre mais je ne tourne pas rond aujourd'hui"
+]
 
-                          "J'ai peur de ne pas pouvoir t'aider",
+no_info_responses = [
+    "Je sais ou c'est mais je ne connais rien à propos de cette endroit",
+    "Je connais l'adresse de ce lieu mais je ne pourrais pas t'en dire plus",
+    "Je connais ce lieu, malheuresement je ne me souviens pas de son histoire"
+]
 
-                          "Mmmh désolé, je ne peux pas te répondre à ce sujet"]
-
-error_responses = ["Je ne peux pas répondre à ta question, désolé",
-
-                   "Je crois bien que mes informations à ce sujet sont "
-                   "éronnées, désolé mais je ne vais pas pouvoir te répondre",
-
-                   "J'aurais aimé te répondre mais je ne tourne pas rond "
-                   "aujourd'hui"]
-
-no_info_responses = ["Je sais ou c'est mais je ne connais rien à propos de "
-                     "cette endroit",
-
-                     "Je connais l'adresse de ce lieu mais "
-                     "je ne pourrais pas t'en dire plus",
-
-                     "Je connais ce lieu, malheuresement je ne me souviens "
-                     "pas de son histoire"]
-
-good_responses = ["Oui je connais cette endroit ! Laisse moi t'en parler un "
-                  "peu",
-
-                  "Je connais ce lieu ! laisse moi t'en parler"]
+good_responses = [
+    "Oui je connais cette endroit ! Laisse moi t'en parler un peu",
+    "Je connais ce lieu ! laisse moi t'en parler"
+]
 
 stop_words = ["a", "à", "abord", "absolument", "afin", "ah", "ai", "aie",
               "ailleurs",

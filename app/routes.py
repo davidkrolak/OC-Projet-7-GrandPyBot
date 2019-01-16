@@ -1,5 +1,5 @@
 from flask import render_template, request, jsonify
-from app.search import search_script
+from app.research import search_script
 from app import app
 
 

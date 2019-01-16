@@ -17,8 +17,8 @@ def test_search_query_2():
     assert openclassrooms['formatted_address'] == '7 Cité Paradis, ' \
                                                   '75010 Paris, ' \
                                                   'France'
-    assert openclassrooms["geometry"]["location"]["lat"] == 48.8747578
-    assert openclassrooms["geometry"]["location"]["lng"] == 2.350564700000001
+    assert openclassrooms["geometry"]["location"]["lat"] == 48.8747265
+    assert openclassrooms["geometry"]["location"]["lng"] == 2.3505517
 
 
 def test_search_query_3():
