@@ -6,6 +6,7 @@ gmaps = googlemaps.Client(key=token)
 
 
 def search_query(research):
+    """Request data from the google place API then return the top results"""
     if len(research) == 0:
         return "INVALID_REQUEST"
     research_prediction = gmaps.places_autocomplete_query(str(research))

@@ -18,6 +18,8 @@ def search_page_id_query(research, tries=0):
 
     result = session.get(url=url, params=params)
     tries += 1
+    # The function will request 3 times the api server if it return
+    # a 504 http code
 
     # http code response management
     if result.status_code == 500:
@@ -43,7 +45,7 @@ def search_page_id_query(research, tries=0):
             return page_id
 
 
-def search_page_summary_query(page_id):
+def search_page_summary_query(page_id, tries=0):
     """Request the summary from a wikipedia page to the wikimedia API
     with the page id and return it in a string format"""
     if type(page_id) is not int:
@@ -64,7 +66,9 @@ def search_page_summary_query(page_id):
         }
 
         result = session.get(url=url, params=params)
-        tries =+ 1
+        tries += 1
+        # The function will request 3 times the api server if it return
+        # a 504 http code
 
         if result.status_code == 500:
             return "wikimedia_error_500"

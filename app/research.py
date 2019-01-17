@@ -6,7 +6,10 @@ from app.api_calls.google_places import search_query
 
 
 def search_script(user_request):
-    """"""
+    """Main research script for the app, parse the user request, search for
+    the parsed request in the google place api, then search for a wikipedia
+    page summary then add a custom response and finally return a dict with
+    all the data needed for the front-end of the application"""
     response_dict = {"id": None,
                      "name": None,
                      "formatted_address": None,
