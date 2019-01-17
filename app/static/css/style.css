@@ -1,3 +1,4 @@
+/*google map style*/
 #mapid {
     height: 250px;
 }
@@ -14,10 +15,34 @@
     background-color: #d7d7d7;
 }
 
+
+/*response style*/
 #response {
-    padding: 0px;
+    padding: 0;
 }
 
+#display_name {
+    padding: 0;
+}
+
+#grandpy_response {
+    padding: 0;
+}
+
+#formated_address {
+    padding: 0;
+}
+
+#pre_definition {
+    padding: 0;
+    margin-bottom: 0em;
+}
+
+#wiki_definition {
+    padding: 0;
+}
+
+/*footer style*/
 #about {
     position: fixed;
     bottom: 0;
