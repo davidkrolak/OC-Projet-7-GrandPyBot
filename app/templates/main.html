@@ -24,9 +24,11 @@
     </div>
   </form>
 
-  <div id="grandpy_response" class="container-fluid">
-    <h2 id="display_name" class="col-6"></h2>
-    <h3 id="formated_address" class="col-6"></h3>
+  <div id="response" class="container-fluid">
+    <p id="display_name" class="col-12"></p>
+    <p id="grandpy_response" class="col-12"></p>
+    <p id="formated_address" class="col-12"></p>
+    <p id="pre_definition" class="col-12"></p>
     <p id="wiki_definition" class="col-12"></p>
   </div>
 </div>
@@ -43,7 +45,8 @@
 
 <script src="https://maps.googleapis.com/maps/api/js?key={{ config["GOOGLE_CLOUD_TOKEN_FRONT"] }}"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script type="text/javascript" src={{ url_for("static", filename="js/init_gmap.js") }}></script>
-<script type="text/javascript" src={{ url_for("static", filename="js/gmap.js") }}></script>
+<script type="text/javascript" src={{ url_for("static", filename="js/init.js") }}></script>
+<script type="text/javascript" src={{ url_for("static", filename="js/response.js") }}></script>
 </body>
 </html>
+
