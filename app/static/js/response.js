@@ -25,7 +25,7 @@ function valid_response(data) {
         position: coordinates,
         visible: true
     });
-    $("#mapid").show();
+    $("#gmap").show();
     $("#mapid_placeholder").hide();
     $("#search_input").val("");
     $("#display_name").text("Tu m'as posé une question sur \"" + data.name + "\".");
@@ -75,7 +75,7 @@ function no_info_response(data) {
         position: coordinates,
         visible: true
     });
-    $("#mapid").show();
+    $("#gmap").show();
     $("#mapid_placeholder").hide();
     $("#search_input").val("");
     $("#display_name").text("Tu m'as posé une question sur \"" + data.name + "\".");

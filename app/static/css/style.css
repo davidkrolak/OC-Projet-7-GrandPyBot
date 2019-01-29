@@ -1,46 +1,136 @@
-/*google map style*/
-#mapid {
-    height: 250px;
+.container {
+    padding: 0;
 }
 
-#mapid_placeholder {
-    width: 100%;
+/*Chatbot*/
+#chat_box {
+    margin: 100px 0 50px 0;
+    padding: 0 15px 0 15px;
+    border-top: medium;
+}
+
+.msg_history {
     height: 250px;
+    overflow-y: auto;
+}
+
+
+/*Incoming message*/
+.incoming_message_img {
+    display: inline-block;
+    width: 6%;
+    min-width: 15px;
+    max-width: 30px;
+}
+
+.incoming_message_img_properties {
+    width: 100%;
+}
+
+.received_message {
+    display: inline-block;
+    padding: 0 0 0 10px;
+    vertical-align: top;
+    width: 92%;
+}
+
+.received_message_width {
+    width: 80%;
+}
+
+.received_message_width p {
+    background: #ebebeb none repeat scroll 0 0;
+    border-radius: 3px;
+    color: #646464;
+    font-size: 14px;
+    margin: 0;
+    padding: 5px 10px 5px 12px;
+    width: 100%;
+}
+
+.wikipedia_link_msg {
+    font-size: small;
+    margin-left: 12px;
+}
+
+
+/*Outgoing message*/
+.outgoing_msg {
+    overflow: hidden;
+    margin: 26px 10px 26px;
+}
+
+.sent_msg {
+    float: right;
+    width: 80%;
+}
+
+.sent_msg p {
+    background: #aadaff none repeat scroll 0 0;
+    border-radius: 3px;
+    font-size: 14px;
+    margin: 0;
+    color: #fff;
+    padding: 5px 10px 5px 12px;
+    width: 100%;
+}
+
+
+/*Input section*/
+.request_input {
+    border-top: 1px solid #c4c4c4;
+    margin-top: 10px;
+    position: relative;
+}
+
+.request_input_text input {
+    background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+    border: medium none;
+    color: #4c4c4c;
+    font-size: 15px;
+    min-height: 48px;
+    width: 100%;
+}
+
+.request_input_text input:required {
+    border: none;
+    border-top: 1px solid red;
+}
+
+.request_send_button {
+    border: medium none;
+    border-radius: 50%;
+    color: #fff;
+    cursor: pointer;
+    height: 34px;
+    position: absolute;
+    right: 0;
+    top: 11px;
+    width: 34px;
+    background: #aadaff none repeat scroll 0 0;
+    background-image: url(../img/send_button.png);
+    background-size: 22px;
+    background-position-x: 5px;
+    background-position-y: 6px;
+    background-repeat: no-repeat;
+}
+
+
+
+/*Google map style*/
+#gmap {
+    height: 250px;
+    border-radius: 15px;
+    padding: 0 15px 0 15px;
 }
 
 #main_title {
     padding: 5px;
     text-align: center;
     font-family: CaviarDreams, Arial, sans-serif;
-    background-color: #d7d7d7;
+    background-color: #ebebeb;
 }
 
-
-/*response style*/
-#response {
-    padding: 0;
-}
-
-#display_name {
-    padding: 0;
-}
-
-#grandpy_response {
-    padding: 0;
-}
-
-#formated_address {
-    padding: 0;
-}
-
-#pre_definition {
-    padding: 0;
-    margin-bottom: 0em;
-}
-
-#wiki_definition {
-    padding: 0;
-}
 
 /*footer style*/
 #about {
@@ -49,7 +139,7 @@
     height: 60px;
     width: 100%;
     font-family: CaviarDreams, Arial, sans-serif;
-    background-color: #d7d7d7;
+    background-color: #ebebeb;
 }
 
 #about_content {
@@ -58,9 +148,8 @@
 
 #about_placeholder {
     width: 100%;
-    height: 80px;
+    height: 130px;
 }
-
 
 .footer_logos {
     padding: 10px;

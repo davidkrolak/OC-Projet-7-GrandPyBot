@@ -3,10 +3,14 @@ from app.api_calls.wikimedia import search_page_id_query, \
 
 
 def test_search_page_id():
+    """Mocks for the research of page id in the wikimedia api"""
     # Correct spelling test queries
     assert search_page_id_query("Montpellier") == 4038983
+
     assert search_page_id_query("Paris") == 681159
+
     assert search_page_id_query('Openclassrooms') == 4338589
+
     # Test spelling mistake
     assert search_page_id_query('Openclasrom') == 4338589
     # No input search query
@@ -16,6 +20,9 @@ def test_search_page_id():
 
 
 def test_page_summary_text():
+    """Mocks for the summary query to the wikimedia api"""
     assert search_page_summary_query('asf') == TypeError
+
     assert type(search_page_summary_query(4038983)) == str
+
     assert search_page_summary_query(4038983)[0:10] == 'Montpellie'

@@ -218,6 +218,5 @@ no_info_responses = [
 ]
 
 good_responses = [
-    "Oui je connais cette endroit ! Laisse moi t'en parler un peu",
-    "Je connais ce lieu ! laisse moi t'en parler"
-]
+    "Je connais cette endroit ! Laisse moi t'en parler un peu",
+    "Je connais ce lieu ! Laisse moi t'en parler"]
