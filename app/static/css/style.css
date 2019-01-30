@@ -11,7 +11,7 @@
 
 .msg_history {
     height: 250px;
-    overflow-y: auto;
+    overflow: auto;
 }
 
 
@@ -46,6 +46,7 @@
     margin: 0;
     padding: 5px 10px 5px 12px;
     width: 100%;
+    word-wrap: break-word;
 }
 
 .wikipedia_link_msg {
@@ -73,6 +74,7 @@
     color: #fff;
     padding: 5px 10px 5px 12px;
     width: 100%;
+    word-wrap: break-word;
 }
 
 
@@ -92,11 +94,6 @@
     width: 100%;
 }
 
-.request_input_text input:required {
-    border: none;
-    border-top: 1px solid red;
-}
-
 .request_send_button {
     border: medium none;
     border-radius: 50%;
@@ -114,7 +111,6 @@
     background-position-y: 6px;
     background-repeat: no-repeat;
 }
-
 
 
 /*Google map style*/
