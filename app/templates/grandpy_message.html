@@ -4,8 +4,12 @@
   </div>
   <div class="received_message">
     <div class="received_message_width">
-      <p></p>
-      <span class="wikipedia_link_msg"><a href="">En savoir plus</a></span>
+      {% if grandpy_response %}
+        <p>{{ grandpy_response }}</p>
+      {% endif %}
+      {% if wiki_link %}
+        <span class="wikipedia_link_msg"><a href="">En savoir plus</a></span>
+      {% endif %}
     </div>
   </div>
 </div>

@@ -16,6 +16,10 @@
 
 
 /*Incoming message*/
+.incoming_msg {
+    margin: 26px 10px 26px;
+}
+
 .incoming_message_img {
     display: inline-block;
     width: 6%;
