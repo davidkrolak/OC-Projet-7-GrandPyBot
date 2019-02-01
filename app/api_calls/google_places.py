@@ -5,7 +5,7 @@ token = app.config["GOOGLE_CLOUD_TOKEN_BACK"]
 gmaps = googlemaps.Client(key=token)
 
 
-def search_query(research):
+def search_places(research):
     """Request data from the google place API then return the top results"""
     if len(research) == 0:
         return "INVALID_REQUEST"
