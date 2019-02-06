@@ -311,12 +311,12 @@ class Research:
                 self.status = "wikimedia_zero_results"
             else:
                 self.wiki_page_id = search_page_id_response
-                self.status = 'wikipedia_page_id_ok'
+                self.status = 'wikimedia_page_id_ok'
 
     def _wikimedia_page_summary_request(self):
         """"""
 
-        if self.status != "wikipedia_page_id_ok":
+        if self.status != "wikimedia_page_id_ok":
             pass
         else:
             search_page_summary_response = wikimedia.search_page_summary(
@@ -334,12 +334,12 @@ class Research:
                 self.status = "wikimedia_zero_results"
             else:
                 self.wiki_summary = search_page_summary_response
-                self.status = "wikipedia_page_summary_ok"
+                self.status = "wikimedia_page_summary_ok"
 
     def _wikimedia_page_url_request(self):
         """"""
 
-        if self.status != "wikipedia_page_summary_ok":
+        if self.status != "wikimedia_page_summary_ok":
             pass
         else:
             search_page_url_response = wikimedia.search_page_url(
@@ -357,7 +357,7 @@ class Research:
                 self.status = "wikimedia_no_page_url"
             else:
                 self.wiki_url = search_page_url_response
-                self.status = "wikipedia_page_url_ok"
+                self.status = "wikimedia_page_url_ok"
 
     def _grandpy_response(self):
         """Add a randomized response to our response dict depending on the
