@@ -244,7 +244,7 @@ class Research:
 
         # Methods launched at creation
         self._request_parser()
-        self._google_api_request()
+        self._google_places_request()
         self._wikimedia_page_id_request()
         self._wikimedia_page_summary_request()
         self._wikimedia_page_url_request()
@@ -271,7 +271,7 @@ class Research:
         filtered_request = "".join(filtered_request).strip().lower()
         self.user_request = filtered_request
 
-    def _google_api_request(self):
+    def _google_places_request(self):
         """Request google places data from the google API and deal with errors
         linked to it then modify value in our response dict"""
 

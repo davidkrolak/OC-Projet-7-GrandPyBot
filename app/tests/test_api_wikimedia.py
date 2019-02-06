@@ -1,28 +1,18 @@
-from app.api_calls.wikimedia import search_page_id, \
-    search_page_summary
+import pytest
+
+from app.api_calls import wikimedia
 
 
-def test_search_page_id():
-    """Mocks for the research of page id in the wikimedia api"""
-    # Correct spelling test queries
-    assert search_page_id("Montpellier") == 4038983
-
-    assert search_page_id("Paris") == 681159
-
-    assert search_page_id('Openclassrooms') == 4338589
-
-    # Test spelling mistake
-    assert search_page_id('Openclasrom') == 4338589
-    # No input search query
-    assert search_page_id("") == "nosrsearch"
-    # Misleading search query
-    assert search_page_id("asdfgasdfg") == "zero_results"
+@pytest.fixture(autouse=True)
+def no_requests(monkeypatch):
+    monkeypatch.delattr("requests.sessions.Session.request")
 
 
-def test_page_summary_text():
-    """Mocks for the summary query to the wikimedia api"""
-    assert search_page_summary('asf') == TypeError
+def test_search_page_id_status_code_500(monkeypatch):
+    """"""
+    result = {'status_code': 500}
 
-    assert type(search_page_summary(4038983)) == str
+    monkeypatch.setattr()
 
-    assert search_page_summary(4038983)[0:10] == 'Montpellie'
+    assert wikimedia.search_page_id('research') == 'wikimedia_error_500'
+

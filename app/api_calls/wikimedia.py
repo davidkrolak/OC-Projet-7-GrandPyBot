@@ -52,8 +52,6 @@ def search_page_summary(page_id, tries=0):
     if type(page_id) is not int:
         return TypeError
     elif type(page_id) is int:
-        session = requests.Session()
-
         url = "https://fr.wikipedia.org/w/api.php"
 
         params = {
@@ -95,8 +93,6 @@ def search_page_url(page_id, tries=0):
     if type(page_id) is not int:
         return TypeError
     elif type(page_id) is int:
-        session = requests.Session()
-
         url = "https://fr.wikipedia.org/w/api.php"
 
         params = {
@@ -131,3 +127,4 @@ def search_page_url(page_id, tries=0):
                 wikipedia_url = "no_url"
 
             return wikipedia_url
+
