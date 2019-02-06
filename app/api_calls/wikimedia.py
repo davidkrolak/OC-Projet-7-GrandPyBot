@@ -1,10 +1,9 @@
 import requests
 
 
-def search_page_id(research, tries=0):
+def search_page_id(research):
     """Request for a wikipedia page id based on a string query we send to the
     wikimedia API and return it"""
-    session = requests.Session()
 
     url = "https://fr.wikipedia.org/w/api.php"
 
@@ -16,17 +15,14 @@ def search_page_id(research, tries=0):
         'srsearch': research
     }
 
-    result = session.get(url=url, params=params)
-    tries += 1
+    result = requests.get(url=url, params=params)
     # The function will request 3 times the api server if it return
     # a 504 http code
 
     # http code response management
     if result.status_code == 500:
         return "wikimedia_error_500"
-    elif result.status_code == 504 and tries <= 2:
-        search_page_id(research, tries)
-    elif result.status_code == 504 and tries > 2:
+    elif result.status_code == 504:
         return "wikimedia_error_504"
     elif result.status_code == 400:
         return "wikimedia_error_400"
@@ -127,4 +123,3 @@ def search_page_url(page_id, tries=0):
                 wikipedia_url = "no_url"
 
             return wikipedia_url
-
