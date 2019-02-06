@@ -242,14 +242,6 @@ class Research:
                             "bonjour",
                             "hello"]
 
-        # Methods launched at creation
-        self._request_parser()
-        self._google_places_request()
-        self._wikimedia_page_id_request()
-        self._wikimedia_page_summary_request()
-        self._wikimedia_page_url_request()
-        self._grandpy_response()
-        self._render_messages()
 
     def _request_parser(self):
         """Parse the user request in multiple words, then check if those one are
@@ -386,3 +378,11 @@ class Research:
 
     def _render_messages(self):
         """"""
+
+    def render(self):
+        self._request_parser()
+        self._google_places_request()
+        self._wikimedia_page_id_request()
+        self._wikimedia_page_summary_request()
+        self._wikimedia_page_url_request()
+        self._grandpy_response()

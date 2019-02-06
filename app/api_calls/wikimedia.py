@@ -42,7 +42,7 @@ def search_page_id(research):
             return page_id
 
 
-def search_page_summary(page_id, tries=0):
+def search_page_summary(page_id):
     """Request the summary from a wikipedia page to the wikimedia API
     with the page id and return it in a string format"""
     if type(page_id) is not int:
@@ -60,16 +60,13 @@ def search_page_summary(page_id, tries=0):
             'pageids': str(page_id)
         }
 
-        result = session.get(url=url, params=params)
-        tries += 1
+        result = requests.get(url=url, params=params)
         # The function will request 3 times the api server if it return
         # a 504 http code
 
         if result.status_code == 500:
             return "wikimedia_error_500"
-        elif result.status_code == 504 and tries <= 2:
-            search_page_summary(page_id, tries)
-        elif result.status_code == 504 and tries > 2:
+        elif result.status_code == 504:
             return "wikimedia_error_504"
         elif result.status_code == 400:
             return "wikimedia_error_400"
@@ -77,6 +74,10 @@ def search_page_summary(page_id, tries=0):
             return "wikimedia_error_404"
         elif result.status_code == 200:
             data = result.json()
+
+            if "error" in data.keys():
+                return "error"
+
             if "extract" in data["query"]["pages"][str(page_id)].keys():
                 summary = data['query']['pages'][str(page_id)]['extract']
                 return summary
@@ -84,7 +85,7 @@ def search_page_summary(page_id, tries=0):
                 return "no_summary"
 
 
-def search_page_url(page_id, tries=0):
+def search_page_url(page_id):
     """"""
     if type(page_id) is not int:
         return TypeError
@@ -99,16 +100,13 @@ def search_page_url(page_id, tries=0):
             'pageids': str(page_id)
         }
 
-        result = session.get(url=url, params=params)
-        tries += 1
+        result = requests.get(url=url, params=params)
         # The function will request 3 times the api server if it return
         # a 504 http code
 
         if result.status_code == 500:
             return "wikimedia_error_500"
-        elif result.status_code == 504 and tries <= 2:
-            search_page_summary(page_id, tries)
-        elif result.status_code == 504 and tries > 2:
+        elif result.status_code == 504:
             return "wikimedia_error_504"
         elif result.status_code == 400:
             return "wikimedia_error_400"
@@ -116,6 +114,9 @@ def search_page_url(page_id, tries=0):
             return "wikimedia_error_404"
         elif result.status_code == 200:
             data = result.json()
+
+            if "error" in data.keys():
+                return "error"
 
             if "fullurl" in data["query"]["pages"][str(page_id)].keys():
                 wikipedia_url = data['query']['pages'][str(page_id)]['fullurl']

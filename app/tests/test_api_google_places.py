@@ -11,7 +11,8 @@ def test_places_autocomplete_zero_results(monkeypatch):
     def zero_result(places_autocomplete_query):
         return []
 
-    monkeypatch.setattr(google_places.gmaps, 'places_autocomplete_query',
+    monkeypatch.setattr(
+            'app.api_calls.google_places.gmaps.places_autocomplete_query',
                         zero_result)
 
     assert google_places.search_places('research') == 'ZERO_RESULTS'
@@ -106,3 +107,5 @@ def test_google_places_ok(monkeypatch):
     monkeypatch.setattr(google_places.gmaps, 'places', ok_status)
 
     assert google_places.search_places('research') == 'result'
+
+
