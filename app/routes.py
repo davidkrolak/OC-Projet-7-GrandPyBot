@@ -1,5 +1,5 @@
 from flask import render_template, request, jsonify
-from app.research import Research
+from app import research
 from app import app
 
 
@@ -17,4 +17,8 @@ def user_msg():
 @app.route('/grandpy_message', methods=['POST'])
 def grandpy_message():
     user_request = request.form.get('user_input')
-    research = Research(user_request)
+    r = research.Research(user_request)
+    return render_template(
+            'grandpy_message_1.html',
+            grandpy_response=r.grandpy_response
+    )

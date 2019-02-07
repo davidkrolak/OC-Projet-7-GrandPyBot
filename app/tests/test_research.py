@@ -1,3 +1,6 @@
+from random import choice
+
+from app import research
 from app.research import Research
 
 
@@ -442,3 +445,40 @@ def test_wikimedia_page_url_request_normal_case(monkeypatch):
 
     assert r.status == "wikimedia_page_url_ok"
     assert r.wiki_url == "test"
+
+
+# Grandpy response tests
+def test_grandpy_response_zero_results_response():
+    """"""
+    r = Research('test')
+    r.status = choice(research.zero_results_status)
+    r._grandpy_response()
+
+    assert r.grandpy_response in research.zero_results_responses
+
+
+def test_grandpy_response_error_responses():
+    """"""
+    r = Research('test')
+    r.status = choice(research.error_status)
+    r._grandpy_response()
+
+    assert r.grandpy_response in research.error_responses
+
+
+def test_grandpy_response_no_info_responses():
+    """"""
+    r = Research('test')
+    r.status = choice(research.no_info_status)
+    r._grandpy_response()
+
+    assert r.grandpy_response in research.no_info_responses
+
+
+def test_grandpy_response_good_responses():
+    """"""
+    r = Research('test')
+    r.status = "wikimedia_page_url_ok"
+    r._grandpy_response()
+
+    assert r.grandpy_response in research.good_responses
