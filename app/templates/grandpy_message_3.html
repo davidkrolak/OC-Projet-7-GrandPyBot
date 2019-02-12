@@ -1,12 +1,7 @@
 <div class="incoming_msg">
-  <div class="incoming_message_img">
-    <img class="incoming_message_img_properties" src="https://ptetutorials.com/images/user-profile.png" alt="grandpy face">
-  </div>
   <div class="received_message">
-    <div class="received_message_width">
-      {% if grandpy_response %}
-        <p>{{ grandpy_response }}</p>
-      {% endif %}
+    <div class="received_message">
+      <p>{{ wiki_summary }}</p>
       {% if wiki_link %}
         <span class="wikipedia_link_msg"><a href="">En savoir plus</a></span>
       {% endif %}

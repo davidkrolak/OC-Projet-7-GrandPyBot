@@ -5,6 +5,7 @@
   <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
   <link rel="stylesheet" href={{ url_for("static", filename="css/bootstrap.css") }}>
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css"/>
   <link rel="stylesheet" href={{ url_for("static", filename="css/style.css") }}>
 </head>
 
@@ -16,25 +17,19 @@
 {#Chatbot section#}
 <div class="container">
   <div class="col-12" id="chat_box">
-    <div class="msg_history">
-      <div class="incoming_msg">
-        <div class="incoming_message_img">
-          <img class="incoming_message_img_properties" src="https://ptetutorials.com/images/user-profile.png" alt="grandpy face">
-        </div>
+    <div id="msg_history">
+      <div class="incoming_msg" data-aos="zoom-in">
         <div class="received_message">
-          <div class="received_message_width">
-            <p>Salut, je suis GrandPyBot. Tu peux me demander des informations à propos d'un lieu et j'esserai d'y répondre</p>
-          </div>
+          <p>Salut, je suis GrandPyBot. Tu peux me demander des informations à propos d'un lieu et j'esserai d'y répondre</p>
         </div>
       </div>
     </div>
-
-    <div class="request_input">
-      <form class="request_input_text" action="">
-        <input id="research_input" type="text" placeholder="Tapez un message" autocomplete="off"/>
-        <button class="request_send_button" type="submit" action="submit"></button>
-      </form>
-    </div>
+  </div>
+  <div id="request_input">
+    <form id="request_input_form" action="">
+      <input id="research_input" type="text" placeholder="Tapez un message" autocomplete="off"/>
+      <button id="request_send_button" type="submit" action="submit"></button>
+    </form>
   </div>
 </div>
 
@@ -57,6 +52,10 @@
 
 <script src="https://maps.googleapis.com/maps/api/js?key={{ config["GOOGLE_CLOUD_TOKEN_FRONT"] }}"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script>
+    AOS.init();
+</script>
 <script type="text/javascript" src={{ url_for("static", filename="js/init.js") }}></script>
 <script type="text/javascript" src={{ url_for("static", filename="js/response.js") }}></script>
 </body>
