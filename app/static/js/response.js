@@ -21,6 +21,8 @@ const no_info_status = [
     "wikimedia_zero_results",
     "wikimedia_no_page_url",
 ];
+
+
 $(document).ready(function () {
 
     $("#request_input_form").submit(function (event) {

@@ -25,8 +25,10 @@
       </div>
     </div>
   </div>
+  {#User input#}
   <div id="request_input">
     <form id="request_input_form" action="">
+      <input name="csrf_token" type="hidden" value="{{ csrf_token() }}">
       <input id="research_input" type="text" placeholder="Tapez un message" autocomplete="off"/>
       <button id="request_send_button" type="submit" action="submit"></button>
     </form>
@@ -53,11 +55,20 @@
 <script src="https://maps.googleapis.com/maps/api/js?key={{ config["GOOGLE_CLOUD_TOKEN_FRONT"] }}"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-<script>
-    AOS.init();
-</script>
+<script>AOS.init();</script>
 <script type="text/javascript" src={{ url_for("static", filename="js/init.js") }}></script>
 <script type="text/javascript" src={{ url_for("static", filename="js/response.js") }}></script>
 </body>
+<script type="text/javascript">
+    var csrf_token = "{{ csrf_token() }}";
+
+    $.ajaxSetup({
+        beforeSend: function (xhr, settings) {
+            if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) && !this.crossDomain) {
+                xhr.setRequestHeader("X-CSRFToken", csrf_token);
+            }
+        }
+    });
+</script>
 </html>
 
