@@ -1,10 +1,8 @@
-<div class="incoming_msg">
+<div class="incoming_msg" data-aos="zoom-in">
   <div class="received_message">
-    <div class="received_message">
-      <p>{{ wiki_summary }}</p>
-      {% if wiki_link %}
-        <span class="wikipedia_link_msg"><a href="">En savoir plus</a></span>
-      {% endif %}
-    </div>
+    <p>{{ wiki_summary }}</p>
+    {% if wiki_link %}
+      <span class="wikipedia_link_msg"><a href="{{ wiki_link }}">En savoir plus</a></span>
+    {% endif %}
   </div>
 </div>

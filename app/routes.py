@@ -29,15 +29,14 @@ def grandpy_message():
                 grandpy_response=r.grandpy_response)
     }
 
-    if r.status in research.wikimedia_ok_status:
+    if r.status == 'wikimedia_page_url_ok':
         response['msg_2'] = render_template('grandpy_message_2.html',
                                             address=r.formatted_address)
+        response['msg_3'] = render_template('grandpy_message_3.html',
+                                            wiki_summary=r.wiki_summary,
+                                            wiki_link=r.wiki_url)
     elif r.status in research.no_info_status:
         response['msg_2'] = render_template('grandpy_message_2.html',
                                             address=r.formatted_address)
 
-    if r.status in research.wikimedia_ok_status:
-        response['msg_3'] = render_template('grandpy_message_3.html',
-                                            wiki_summary=r.wiki_summary,
-                                            wiki_link=r.wiki_url)
     return jsonify(response)

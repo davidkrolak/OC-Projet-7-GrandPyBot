@@ -109,7 +109,7 @@ class Research:
             elif search_page_summary_response == "no_summary":
                 self.status = "wikimedia_zero_results"
             else:
-                self.wiki_summary = search_page_summary_response
+                self.wiki_summary = search_page_summary_response[0:300] + "..."
                 self.status = "wikimedia_page_summary_ok"
 
     def _wikimedia_page_url_request(self):
@@ -162,9 +162,8 @@ google_ok_status = [
 ]
 wikimedia_ok_status = [
     "wikimedia_page_id_ok",
-    "wikimedia_page_summary_ok"
+    "wikimedia_page_summary_ok",
     "wikimedia_page_url_ok"
-
 ]
 error_status = [
     "wikimedia_error_500",
