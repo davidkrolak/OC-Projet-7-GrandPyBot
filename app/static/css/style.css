@@ -2,6 +2,10 @@
     padding: 10px;
 }
 
+.container-fluid {
+    padding: 0;
+}
+
 .col-12 {
     padding: 0;
 }
@@ -12,14 +16,13 @@ header {
 }
 
 #top_header {
+    margin: 0px;
     height: auto;
     max-height: 50px;
     background-color: #ebebeb;
-    position: center;
 }
 
 #grandpy_logo {
-    margin-left: 5px;
     max-width: 50px;
     max-height: 50px;
     width: auto;
@@ -168,6 +171,7 @@ header {
 }
 
 #about_content {
+    margin-left: 10px;
     padding-left: 10px;
 }
 
