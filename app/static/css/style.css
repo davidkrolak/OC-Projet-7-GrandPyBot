@@ -6,6 +6,49 @@
     padding: 0;
 }
 
+/*Header*/
+header {
+    height: 70px;
+}
+
+#top_header {
+    height: auto;
+    max-height: 50px;
+    background-color: #ebebeb;
+    position: center;
+}
+
+#grandpy_logo {
+    margin-left: 5px;
+    max-width: 50px;
+    max-height: 50px;
+    width: auto;
+    height: auto;
+}
+
+#main_title {
+    min-width: 230px;
+    height: auto;
+    width: auto;
+    padding: 0 0 0 0;
+    text-align: center;
+    align-items: center;
+    font-family: CaviarDreams, Arial, sans-serif;
+}
+
+#bottom_header {
+    margin: 0 0 10px 0;
+    background-color: #f5f5f5;
+}
+
+#description {
+    text-align: center;
+    font-size: medium;
+    font-family: CaviarDreams, Arial, sans-serif;
+
+}
+
+
 /*Chatbot*/
 #chat_box {
     height: 250px;
@@ -80,6 +123,7 @@
 }
 
 #request_input_form input {
+    padding-right: 44px;
     background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
     border: medium none;
     color: #4c4c4c;
@@ -98,12 +142,10 @@
     right: 0;
     top: 11px;
     width: 34px;
-    background: #aadaff none repeat scroll 0 0;
-    background-image: url(../img/send_button.png);
+    background: #aadaff url(../img/send_button.png) no-repeat scroll;
     background-size: 22px;
     background-position-x: 5px;
     background-position-y: 6px;
-    background-repeat: no-repeat;
 }
 
 
@@ -112,13 +154,6 @@
     height: 250px;
     border-radius: 15px;
     padding: 0 15px 0 15px;
-}
-
-#main_title {
-    padding: 5px;
-    text-align: center;
-    font-family: CaviarDreams, Arial, sans-serif;
-    background-color: #ebebeb;
 }
 
 

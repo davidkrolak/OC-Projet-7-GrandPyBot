@@ -12,8 +12,6 @@ def no_requests(monkeypatch):
 
 # Search page id function tests
 def test_search_page_id_status_code_500(monkeypatch):
-    """"""
-
     def get_mock(url, params):
         r = requests.Response()
         r.status_code = 500
@@ -25,8 +23,6 @@ def test_search_page_id_status_code_500(monkeypatch):
 
 
 def test_search_page_id_status_code_504(monkeypatch):
-    """"""
-
     def get_mock(url, params):
         r = requests.Response()
         r.status_code = 504
@@ -38,8 +34,6 @@ def test_search_page_id_status_code_504(monkeypatch):
 
 
 def test_search_page_id_status_code_400(monkeypatch):
-    """"""
-
     def get_mock(url, params):
         r = requests.Response()
         r.status_code = 400
@@ -51,8 +45,6 @@ def test_search_page_id_status_code_400(monkeypatch):
 
 
 def test_search_page_id_status_code_404(monkeypatch):
-    """"""
-
     def get_mock(url, params):
         r = requests.Response()
         r.status_code = 404
@@ -64,8 +56,6 @@ def test_search_page_id_status_code_404(monkeypatch):
 
 
 def test_search_page_id_status_code_200_error(monkeypatch):
-    """"""
-
     def get_mock(url, params):
         r = requests.Response()
         r.status_code = 200
@@ -82,8 +72,6 @@ def test_search_page_id_status_code_200_error(monkeypatch):
 
 
 def test_search_page_id_status_code_200_zero_results(monkeypatch):
-    """"""
-
     def get_mock(url, params):
         r = requests.Response()
         r.status_code = 200
@@ -100,8 +88,6 @@ def test_search_page_id_status_code_200_zero_results(monkeypatch):
 
 
 def test_search_page_id_normal_case(monkeypatch):
-    """"""
-
     def get_mock(url, params):
         r = requests.Response()
         r.status_code = 200
@@ -127,8 +113,6 @@ def test_search_page_summary_wrong_input_type():
 
 
 def test_search_page_summary_status_code_500(monkeypatch):
-    """"""
-
     def get_mock(url, params):
         r = requests.Response()
         r.status_code = 500
@@ -140,8 +124,6 @@ def test_search_page_summary_status_code_500(monkeypatch):
 
 
 def test_search_page_summary_status_code_504(monkeypatch):
-    """"""
-
     def get_mock(url, params):
         r = requests.Response()
         r.status_code = 504
@@ -153,8 +135,6 @@ def test_search_page_summary_status_code_504(monkeypatch):
 
 
 def test_search_page_summary_status_code_400(monkeypatch):
-    """"""
-
     def get_mock(url, params):
         r = requests.Response()
         r.status_code = 400
@@ -166,8 +146,6 @@ def test_search_page_summary_status_code_400(monkeypatch):
 
 
 def test_search_page_summary_status_code_404(monkeypatch):
-    """"""
-
     def get_mock(url, params):
         r = requests.Response()
         r.status_code = 404
@@ -179,8 +157,6 @@ def test_search_page_summary_status_code_404(monkeypatch):
 
 
 def test_search_page_summary_code_200_error(monkeypatch):
-    """"""
-
     def get_mock(url, params):
         r = requests.Response()
         r.status_code = 200
@@ -197,8 +173,6 @@ def test_search_page_summary_code_200_error(monkeypatch):
 
 
 def test_search_page_summary_code_200_no_summary(monkeypatch):
-    """"""
-
     def get_mock(url, params):
         r = requests.Response()
         r.status_code = 200
@@ -215,8 +189,6 @@ def test_search_page_summary_code_200_no_summary(monkeypatch):
 
 
 def test_search_page_summary_normal_case(monkeypatch):
-    """"""
-
     def get_mock(url, params):
         r = requests.Response()
         r.status_code = 200
@@ -241,8 +213,6 @@ def test_search_page_url_wrong_input_type():
 
 
 def test_search_page_url_status_code_500(monkeypatch):
-    """"""
-
     def get_mock(url, params):
         r = requests.Response()
         r.status_code = 500
@@ -254,8 +224,6 @@ def test_search_page_url_status_code_500(monkeypatch):
 
 
 def test_search_page_url_status_code_504(monkeypatch):
-    """"""
-
     def get_mock(url, params):
         r = requests.Response()
         r.status_code = 504
@@ -267,8 +235,6 @@ def test_search_page_url_status_code_504(monkeypatch):
 
 
 def test_search_page_url_status_code_400(monkeypatch):
-    """"""
-
     def get_mock(url, params):
         r = requests.Response()
         r.status_code = 400
@@ -280,8 +246,6 @@ def test_search_page_url_status_code_400(monkeypatch):
 
 
 def test_search_page_url_status_code_404(monkeypatch):
-    """"""
-
     def get_mock(url, params):
         r = requests.Response()
         r.status_code = 404
@@ -293,8 +257,6 @@ def test_search_page_url_status_code_404(monkeypatch):
 
 
 def test_search_page_url_code_200_error(monkeypatch):
-    """"""
-
     def get_mock(url, params):
         r = requests.Response()
         r.status_code = 200
@@ -311,8 +273,6 @@ def test_search_page_url_code_200_error(monkeypatch):
 
 
 def test_search_page_url_code_200_no_url(monkeypatch):
-    """"""
-
     def get_mock(url, params):
         r = requests.Response()
         r.status_code = 200
@@ -329,8 +289,6 @@ def test_search_page_url_code_200_no_url(monkeypatch):
 
 
 def test_search_page_url_normal_case(monkeypatch):
-    """"""
-
     def get_mock(url, params):
         r = requests.Response()
         r.status_code = 200

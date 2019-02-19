@@ -86,7 +86,8 @@ def search_page_summary(page_id):
 
 
 def search_page_url(page_id):
-    """"""
+    """Request the page url from a wikipedia page to the wikimedia API
+    with the page id and return it in a string format"""
     if type(page_id) is not int:
         return TypeError
     elif type(page_id) is int:

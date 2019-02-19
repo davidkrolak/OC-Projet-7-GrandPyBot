@@ -6,20 +6,20 @@ def test_invalid_request_len_0():
 
 
 def test_places_autocomplete_zero_results(monkeypatch):
-    """Mock cases where the google places autocomplete function find no results"""
+    """Mock cases where the google places autocomplete function
+    find no results"""
 
     def zero_result(places_autocomplete_query):
         return []
 
     monkeypatch.setattr(
             'app.api_calls.google_places.gmaps.places_autocomplete_query',
-                        zero_result)
+            zero_result)
 
     assert google_places.search_places('research') == 'ZERO_RESULTS'
 
 
 def test_google_places_zero_results(monkeypatch):
-    """"""
     google_places_results = {'status': 'ZERO_RESULTS',
                              'description': 'description'}
 
@@ -37,7 +37,6 @@ def test_google_places_zero_results(monkeypatch):
 
 
 def test_google_places_request_denied(monkeypatch):
-    """"""
     google_places_results = {'status': 'REQUEST_DENIED',
                              'description': 'description'}
 
@@ -55,7 +54,6 @@ def test_google_places_request_denied(monkeypatch):
 
 
 def test_google_places_invalid_request(monkeypatch):
-    """"""
     google_places_results = {'status': 'INVALID_REQUEST',
                              'description': 'description'}
 
@@ -73,7 +71,6 @@ def test_google_places_invalid_request(monkeypatch):
 
 
 def test_google_places_unknown_error(monkeypatch):
-    """"""
     google_places_results = {'status': 'UNKNOWN_ERROR',
                              'description': 'description'}
 
@@ -91,7 +88,6 @@ def test_google_places_unknown_error(monkeypatch):
 
 
 def test_google_places_ok(monkeypatch):
-    """"""
     google_places_results = {'status': 'OK',
                              'description': 'description',
                              'results': ['result']}
@@ -107,5 +103,3 @@ def test_google_places_ok(monkeypatch):
     monkeypatch.setattr(google_places.gmaps, 'places', ok_status)
 
     assert google_places.search_places('research') == 'result'
-
-

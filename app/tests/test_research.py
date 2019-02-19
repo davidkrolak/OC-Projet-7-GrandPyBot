@@ -18,15 +18,13 @@ def test_request_parser_no_input():
 
 
 def test_request_parser_punctuation_input():
-    r = Research("!\"#$%&'()*+,-./:;<=>?@[\]^_`{|}~")
+    r = Research("!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~")
     r._request_parser()
     assert r.user_request == ""
 
 
 # Google Places request tests
 def test_google_places_request_zero_results(monkeypatch):
-    """"""
-
     def mock_return(user_request):
         return "ZERO_RESULTS"
 
@@ -39,8 +37,6 @@ def test_google_places_request_zero_results(monkeypatch):
 
 
 def test_google_places_request_over_query_limit(monkeypatch):
-    """"""
-
     def mock_return(user_request):
         return "OVER_QUERY_LIMIT"
 
@@ -53,8 +49,6 @@ def test_google_places_request_over_query_limit(monkeypatch):
 
 
 def test_google_places_request_request_denied(monkeypatch):
-    """"""
-
     def mock_return(user_request):
         return "REQUEST_DENIED"
 
@@ -67,8 +61,6 @@ def test_google_places_request_request_denied(monkeypatch):
 
 
 def test_google_places_request_invalid_request(monkeypatch):
-    """"""
-
     def mock_return(user_request):
         return "INVALID_REQUEST"
 
@@ -81,8 +73,6 @@ def test_google_places_request_invalid_request(monkeypatch):
 
 
 def test_google_places_request_unknown_error(monkeypatch):
-    """"""
-
     def mock_return(user_request):
         return "UNKNOWN_ERROR"
 
@@ -95,8 +85,6 @@ def test_google_places_request_unknown_error(monkeypatch):
 
 
 def test_google_places_request_normal_case(monkeypatch):
-    """"""
-
     def mock_return(user_request):
         r = {'name': 'test',
              'formatted_address': 'test',
@@ -117,7 +105,6 @@ def test_google_places_request_normal_case(monkeypatch):
 
 # Wikimedia page id request tests
 def test_wikimedia_page_id_request_wrong_status():
-    """"""
     r = Research("")
     r.status = "google_error"
     r._wikimedia_page_id_request()
@@ -126,8 +113,6 @@ def test_wikimedia_page_id_request_wrong_status():
 
 
 def test_wikimedia_page_id_request_error_500(monkeypatch):
-    """"""
-
     def mock_return(name):
         return "wikimedia_error_500"
 
@@ -141,8 +126,6 @@ def test_wikimedia_page_id_request_error_500(monkeypatch):
 
 
 def test_wikimedia_page_id_request_error_504(monkeypatch):
-    """"""
-
     def mock_return(name):
         return "wikimedia_error_504"
 
@@ -156,8 +139,6 @@ def test_wikimedia_page_id_request_error_504(monkeypatch):
 
 
 def test_wikimedia_page_id_request_error_400(monkeypatch):
-    """"""
-
     def mock_return(name):
         return "wikimedia_error_400"
 
@@ -171,8 +152,6 @@ def test_wikimedia_page_id_request_error_400(monkeypatch):
 
 
 def test_wikimedia_page_id_request_error_404(monkeypatch):
-    """"""
-
     def mock_return(name):
         return "wikimedia_error_404"
 
@@ -186,8 +165,6 @@ def test_wikimedia_page_id_request_error_404(monkeypatch):
 
 
 def test_wikimedia_page_id_request_undefined_error(monkeypatch):
-    """"""
-
     def mock_return(name):
         return "error"
 
@@ -201,8 +178,6 @@ def test_wikimedia_page_id_request_undefined_error(monkeypatch):
 
 
 def test_wikimedia_page_id_request_zero_results(monkeypatch):
-    """"""
-
     def mock_return(name):
         return "zero_results"
 
@@ -216,8 +191,6 @@ def test_wikimedia_page_id_request_zero_results(monkeypatch):
 
 
 def test_wikimedia_page_id_normal_case(monkeypatch):
-    """"""
-
     def mock_return(name):
         return 1
 
@@ -233,8 +206,6 @@ def test_wikimedia_page_id_normal_case(monkeypatch):
 
 # Wikimedia page summary request tests
 def test_wikimedia_page_summary_request_wrong_status():
-    """"""
-
     r = Research("")
     r.status = "wikimedia_error"
     r._wikimedia_page_summary_request()
@@ -243,8 +214,6 @@ def test_wikimedia_page_summary_request_wrong_status():
 
 
 def test_wikimedia_page_summary_request_error_500(monkeypatch):
-    """"""
-
     def mock_return(name):
         return "wikimedia_error_500"
 
@@ -259,8 +228,6 @@ def test_wikimedia_page_summary_request_error_500(monkeypatch):
 
 
 def test_wikimedia_page_summary_request_error_504(monkeypatch):
-    """"""
-
     def mock_return(name):
         return "wikimedia_error_504"
 
@@ -275,8 +242,6 @@ def test_wikimedia_page_summary_request_error_504(monkeypatch):
 
 
 def test_wikimedia_page_summary_request_error_400(monkeypatch):
-    """"""
-
     def mock_return(name):
         return "wikimedia_error_400"
 
@@ -291,8 +256,6 @@ def test_wikimedia_page_summary_request_error_400(monkeypatch):
 
 
 def test_wikimedia_page_summary_request_error_404(monkeypatch):
-    """"""
-
     def mock_return(name):
         return "wikimedia_error_404"
 
@@ -307,8 +270,6 @@ def test_wikimedia_page_summary_request_error_404(monkeypatch):
 
 
 def test_wikimedia_page_summary_request_no_summary(monkeypatch):
-    """"""
-
     def mock_return(name):
         return "no_summary"
 
@@ -323,8 +284,6 @@ def test_wikimedia_page_summary_request_no_summary(monkeypatch):
 
 
 def test_wikimedia_page_summary_normal_case(monkeypatch):
-    """"""
-
     def mock_return(page_id):
         return "test"
 
@@ -336,13 +295,11 @@ def test_wikimedia_page_summary_normal_case(monkeypatch):
     r._wikimedia_page_summary_request()
 
     assert r.status == "wikimedia_page_summary_ok"
-    assert r.wiki_summary == "test"
+    assert r.wiki_summary == "test..."
 
 
 # Wikimedia page url request tests
 def test_wikimedia_page_url_request_wrong_status():
-    """"""
-
     r = Research("")
     r.status = "wikimedia_zero_results"
     r._wikimedia_page_url_request()
@@ -351,8 +308,6 @@ def test_wikimedia_page_url_request_wrong_status():
 
 
 def test_wikimedia_page_url_request_error_500(monkeypatch):
-    """"""
-
     def mock_return(name):
         return "wikimedia_error_500"
 
@@ -367,8 +322,6 @@ def test_wikimedia_page_url_request_error_500(monkeypatch):
 
 
 def test_wikimedia_page_url_request_error_504(monkeypatch):
-    """"""
-
     def mock_return(name):
         return "wikimedia_error_504"
 
@@ -383,8 +336,6 @@ def test_wikimedia_page_url_request_error_504(monkeypatch):
 
 
 def test_wikimedia_page_url_request_error_400(monkeypatch):
-    """"""
-
     def mock_return(name):
         return "wikimedia_error_400"
 
@@ -399,8 +350,6 @@ def test_wikimedia_page_url_request_error_400(monkeypatch):
 
 
 def test_wikimedia_page_url_request_error_404(monkeypatch):
-    """"""
-
     def mock_return(name):
         return "wikimedia_error_404"
 
@@ -415,8 +364,6 @@ def test_wikimedia_page_url_request_error_404(monkeypatch):
 
 
 def test_wikimedia_page_url_request_no_url(monkeypatch):
-    """"""
-
     def mock_return(name):
         return "no_url"
 
@@ -431,8 +378,6 @@ def test_wikimedia_page_url_request_no_url(monkeypatch):
 
 
 def test_wikimedia_page_url_request_normal_case(monkeypatch):
-    """"""
-
     def mock_return(name):
         return "test"
 
@@ -449,7 +394,6 @@ def test_wikimedia_page_url_request_normal_case(monkeypatch):
 
 # Grandpy response tests
 def test_grandpy_response_zero_results_response():
-    """"""
     r = Research('test')
     r.status = choice(research.zero_results_status)
     r._grandpy_response()
@@ -458,7 +402,6 @@ def test_grandpy_response_zero_results_response():
 
 
 def test_grandpy_response_error_responses():
-    """"""
     r = Research('test')
     r.status = choice(research.error_status)
     r._grandpy_response()
@@ -467,7 +410,6 @@ def test_grandpy_response_error_responses():
 
 
 def test_grandpy_response_no_info_responses():
-    """"""
     r = Research('test')
     r.status = choice(research.no_info_status)
     r._grandpy_response()
@@ -476,7 +418,6 @@ def test_grandpy_response_no_info_responses():
 
 
 def test_grandpy_response_good_responses():
-    """"""
     r = Research('test')
     r.status = "wikimedia_page_url_ok"
     r._grandpy_response()

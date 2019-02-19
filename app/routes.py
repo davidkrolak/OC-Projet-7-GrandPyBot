@@ -2,9 +2,9 @@ from flask import render_template, request, jsonify
 from flask_wtf.csrf import CSRFProtect
 from app import research
 from app import app
-import html
 
 csrf = CSRFProtect(app)
+
 
 @app.route('/')
 def main():
