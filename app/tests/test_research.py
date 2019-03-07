@@ -6,7 +6,7 @@ from app.research import Research
 
 # Request parser tests
 def test_request_parser_normal_sentence():
-    r = Research("Salut, peux tu me parler de Montpellier ?")
+    r = Research("Salut, pourrais-tu me parler de Montpellier ?")
     r._request_parser()
     assert r.user_request == "montpellier"
 
