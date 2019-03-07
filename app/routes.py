@@ -14,6 +14,7 @@ def main():
 @app.route('/user_message', methods=['POST'])
 def user_msg():
     user_input = request.form.get('user_input')
+    print(user_input)  # Logs users input to Stdout
     return render_template('user_message.html', message=user_input)
 
 
@@ -41,5 +42,5 @@ def grandpy_message():
     elif r.status in research.no_info_status:
         response['msg_2'] = render_template('grandpy_message_2.html',
                                             address=r.formatted_address)
-
+    print(r.status)  # Logs response status to stdout
     return jsonify(response)
